@@ -44,7 +44,7 @@ const index = () => {
 
   return (
     <ContainerItem>
-      <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+      <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2 mt-32">
         {item.map((item) => (
           <CardItem key={item.id} dataItem={item} />
         ))}

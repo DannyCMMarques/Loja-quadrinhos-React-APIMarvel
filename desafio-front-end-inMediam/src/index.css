@@ -1,53 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-  :root {
-    --branco-100: #ffff;
-    --branco-200: #fafafa;
-    --branco-300: #fbfbfb;
-    --preto-400: #4e4e4e;
-    --preto: #313131;
-    --azul: #0185ff;
-    --verde: rgb(0, 197, 138);
-    --verde-400: rgb(2, 255, 179);
-    --vermelho-100: #ff7373;
-    --laranja: #f48646;
-  }
+:root {
+  --branco-100: #ffff;
+  --branco-200: #fafafa;
+  --branco-300: #fbfbfb;
+  --preto-400: #4e4e4e;
+  --preto: #313131;
+  --azul: #0185ff;
+  --verde: rgb(0, 197, 138);
+  --verde-400: rgb(2, 255, 179);
+  --vermelho-100: #ff7373;
+  --laranja: #f48646;
+  --preto-bg: #171717;
+}
 
-  body {
-    background: var(--preto);
-    color: var(--preto);
-    -webkit-font-smoothing: antialiased;
-  }
+body {
+  background: var(--preto-bg);
+  color: var(--preto);
+  -webkit-font-smoothing: antialiased;
+}
 
-  body,
-  input,
-  textarea,
-  select,
-  button {
-    font: 400 1rem "Poppins", sans-serif;
-  }
+body,
+input,
+textarea,
+select,
+button {
+  font:
+    400 1rem "Poppins",
+    sans-serif;
+}
 
-  button {
-    cursor: pointer;
-  }
+button {
+  cursor: pointer;
+}
 
-  @media (max-width: 1080px) {
-    html {
-      font-size: 93.75%;
-    }
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%;
   }
+}
 
-  @media (max-width: 720px) {
-    html {
-      font-size: 87.5%;
-    }
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%;
   }
+}
