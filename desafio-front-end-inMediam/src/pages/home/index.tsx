@@ -23,7 +23,7 @@ const index = () => {
       id: 3,
       nomeCartoon: "Homem aranha",
       imagemCartoon:
-        "https://darkside.vtexassets.com/arquivos/ids/195360/causas_nao_naturais_mini_capa.png?v=638519819438170000",
+        "https://files.tecnoblog.net/wp-content/uploads/2022/09/stable-diffusion-imagem.jpg",
       precoCartoon: 100.0,
     },
     {
