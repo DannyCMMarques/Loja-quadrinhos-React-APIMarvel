@@ -8,13 +8,15 @@ const CardItem = ({ dataItem }: CardProps) => {
     <>
       <div className="w-full">
         <div
-          className="w-full cursor-pointer bg-center h-72"
+          className="w-11/12 cursor-pointer bg-center h-72"
           style={{
             backgroundImage: `url(${dataItem.imagemCartoon})`,
             backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
-          <div className="flex  h-full items-center justify-center bg-neutral-700 bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity duration-300">
+          <div className="flex  h-full w-full items-center justify-center bg-neutral-700 bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity duration-300">
             <div>
               <p className="text-white font-bold text-3xl text-center">
                 R${dataItem.precoCartoon}
@@ -33,7 +35,7 @@ const CardItem = ({ dataItem }: CardProps) => {
         </div>
 
         <div>
-          <p className="text-white cursor-pointer text-center text-base text-md font-semibold mt-2 hover:text-red-500">
+          <p className="text-white cursor-pointer text-center text-base text-md font-semibold mt-2 hover:text-red-800">
             {dataItem.nomeCartoon}
           </p>
         </div>
