@@ -36,16 +36,16 @@ input,
 textarea,
 select,
 button {
-  font:
-    400 1rem "Poppins",
-    sans-serif;
+  font: 400 1rem "Poppins", sans-serif;
 }
 
 button {
   cursor: pointer;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
