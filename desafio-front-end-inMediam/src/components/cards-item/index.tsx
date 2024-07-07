@@ -25,7 +25,7 @@ const CardItem = ({ dataItem }: CardProps) => {
                 <button className="text-white uppercase text-xs font-bold  py-2 px-4 rounded border border-white mt-5 hover:border-red-800 hover:bg-red-800">
                   {MESSAGES.BOTAO_CARD_ITEM}
                 </button>
-                <p className="text-white items-center font-bold uppercase text-xs flex gap-1 hover:text-amber-500 mt-5 text-center">
+                <p className="text-white items-center justify-center font-bold uppercase text-xs flex gap-1 hover:text-amber-500 mt-5 text-center">
                   {MESSAGES.BOTAO_COMPRAR_CARD_ITEM}
                   <FaBasketShopping size={16} />
                 </p>
