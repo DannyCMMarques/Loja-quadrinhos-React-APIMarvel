@@ -10,6 +10,7 @@ import { bgWhite } from "../../../utils/mocks/bg-white";
 import FrasesHomeComponente from "../../../components/frases-Home";
 import { MESSAGES } from "../../../utils/messages";
 import { useLocation } from "react-router-dom";
+import Paginacao from "../../../components/paginacao/paginacao";
 
 const ProductList = () => {
   const item: CardItemProps[] = livrosMock;
@@ -50,6 +51,9 @@ const ProductList = () => {
               {item.map((item) => (
                 <CardItem key={item.id} dataItem={item} />
               ))}
+            </div>
+            <div className="mt-10 flex w-full justify-center">
+              <Paginacao onPageChange={item}  totalPages={10}/>
             </div>
           </ContainerItem>
         </div>
