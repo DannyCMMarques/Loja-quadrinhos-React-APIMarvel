@@ -1,8 +1,17 @@
 import React from "react";
 import { CardProps } from "../../utils/interfaces/card-props";
 const CardRadioItem = ({ dataItem }: CardProps) => {
+  const handleRedirect = (id) => {
+    window.location.href = `/comics/${id}`;
+  };
+
   return (
-    <div className="w-full">
+    <div
+      className="w-full"
+      onClick={() => {
+        handleRedirect(dataItem.id);
+      }}
+    >
       <div className="w-full flex justify-center items-center cursor-pointer">
         <div
           className="w-24 rounded-full h-24 items-center"
