@@ -1,5 +1,5 @@
 import { HeroProps } from "./heroProps";
 
 export interface CardBannerHeroProps {
-    dataItem: HeroProps;
-  }
+  dataItem: HeroProps;
+}
