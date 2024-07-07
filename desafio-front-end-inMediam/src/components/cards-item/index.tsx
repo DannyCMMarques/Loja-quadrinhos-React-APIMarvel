@@ -4,6 +4,11 @@ import { CardProps } from "../../utils/interfaces/card-props";
 import { FaBasketShopping } from "react-icons/fa6";
 
 const CardItem = ({ dataItem }: CardProps) => {
+
+  const handleRedirect = (id) => {
+    window.location.href = `/comics/${id}`
+  }
+
   return (
     <>
       <div className="w-full">
@@ -22,7 +27,7 @@ const CardItem = ({ dataItem }: CardProps) => {
                 R${dataItem.precoCartoon}
               </p>
               <div>
-                <button className="text-white uppercase text-xs font-bold  py-2 px-4 rounded border border-white mt-5 hover:border-red-800 hover:bg-red-800">
+                <button onClick={() => {handleRedirect(dataItem.id)}} className="text-white uppercase text-xs font-bold  py-2 px-4 rounded border border-white mt-5 hover:border-red-800 hover:bg-red-800">
                   {MESSAGES.BOTAO_CARD_ITEM}
                 </button>
                 <p className="text-white items-center justify-center font-bold uppercase text-xs flex gap-1 hover:text-amber-500 mt-5 text-center">
