@@ -40,7 +40,7 @@ const index = () => {
             </SwiperComponent>
           </div>
 
-          <div className="mt-20 hidden sm:block md:block">
+          <div className="mt-20 ">
             <div className="w-full mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_HOME_DESTAQUE} />
             </div>
