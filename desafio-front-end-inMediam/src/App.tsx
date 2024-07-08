@@ -8,7 +8,7 @@ import ProdutoInfo from "./pages/produtos/produtos-info";
 function App() {
   return (
     <>
-      <BrowserRouter>
+     <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/comics" element={<ProductList />} />
