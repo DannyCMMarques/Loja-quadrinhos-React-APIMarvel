@@ -34,17 +34,16 @@ const Index = () => {
     }
   }, [dataComics]);
 
-    const getComics = useCallback(() => {
-      comicService
-        .getComics()
-        .then((comic) => {
-          setDataComics(comic.data.results);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }, []);
-
+  const getComics = useCallback(() => {
+    comicService
+      .getComics(20, 80)
+      .then((comic) => {
+        setDataComics(comic.data.results);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const getBestCharacters = useCallback(() => {
     charactersService
@@ -122,8 +121,8 @@ const Index = () => {
               <FrasesHomeComponente frase={MESSAGES.FRASE_HOME_DESTAQUE} />
             </div>
             <div className="w-96 h-96">
-            <DestaqueComponente />
-             </div>
+              <DestaqueComponente />
+            </div>
           </div>
 
           <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
