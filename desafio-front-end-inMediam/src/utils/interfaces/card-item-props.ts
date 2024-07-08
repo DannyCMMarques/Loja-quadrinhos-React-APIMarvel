@@ -1,6 +1,6 @@
 export interface CardItemProps {
   id: number;
-  nomeCartoon: string;
-  imagemCartoon: string;
+  nomeCartoon: any;
+  imagemCartoon: any;
   precoCartoon: number;
 }
