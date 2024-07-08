@@ -1,12 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CardItem from "../../components/cards-item";
 import ContainerItem from "../../components/container";
-import { CardItemProps } from "../../utils/interfaces/card-item-props";
 import SwiperComponent from "../../components/swiper";
 import CardBannerItem from "../../components/card-banner-item";
-import { livrosMock } from "../../utils/mocks/livros";
-import { heroImage } from "../../utils/mocks/hero-image";
-import { HeroProps } from "../../utils/interfaces/heroProps";
 import { MESSAGES } from "./../../utils/messages/index";
 import FrasesHomeComponente from "../../components/frases-Home";
 import DestaqueComponente from "./../../components/destaque/index";
@@ -34,48 +30,41 @@ const Index = () => {
     }
   }, [dataComics]);
 
-  const getComics = useCallback(() => {
-    comicService
-      .getComics(20, 80)
-      .then((comic) => {
-        setDataComics(comic.data.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const getComics = useCallback(async () => {
+    try {
+      const comic = await comicService.getComics(20, 80);
+      setDataComics(comic.data.results);
+    } catch (err) {
+      console.error("Erro ao buscar quadrinhos:", err);
+    }
+  }, [comicService]);
 
-  const getBestCharacters = useCallback(() => {
-    charactersService
-      .getBestCharacters()
-      .then((character) => {
-        setBestCharacters(character.data.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const getBestCharacters = useCallback(async () => {
+    try {
+      const character = await charactersService.getBestCharacters(20, 0);
+      setBestCharacters(character.data.results);
+    } catch (err) {
+      console.error("Erro ao buscar character:", err);
+    }
+  }, [charactersService]);
 
-  const getAncientOne = useCallback(() => {
-    charactersService
-      .getAncientOne()
-      .then((character) => {
-        setDataAncientOne(character.data.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-  const getBestCreators = useCallback(() => {
-    creatorsService
-      .getBestCreators()
-      .then((creators) => {
-        setBestCreators(creators.data.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const getAncientOne = useCallback(async () => {
+    try {
+      const ancientOne = await charactersService.getAncientOne(20, 0);
+      setDataAncientOne(ancientOne.data.results);
+    } catch (err) {
+      console.error("Erro ao buscar ansient one:", err);
+    }
+  }, [charactersService]);
+
+  const getBestCreators = useCallback(async () => {
+    try {
+      const bestCreators = await creatorsService.getBestCreators(20, 0);
+      setBestCreators(bestCreators.data.results);
+    } catch (err) {
+      console.error("Erro ao buscar creators:", err);
+    }
+  }, [creatorsService]);
 
   useEffect(() => {
     getComics();
