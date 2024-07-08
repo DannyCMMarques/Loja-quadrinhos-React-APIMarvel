@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import ContainerItem from "../container";
 import { FaUser } from "react-icons/fa6";
 import { MESSAGES } from "./../../utils/messages/index";
 import { CardBannerHeroProps } from "../../utils/interfaces/card-banner-hero";
 
 const CardBannerItem = ({ dataItem }: any) => {
+  const [mostrarDescricaoLonga, setMostrarDescricaoLonga] = useState(false);
+
+  const description =
+    dataItem?.description === "#N/A" ? "" : dataItem?.description;
+  const descricaoLonga = description?.length > 150;
+
+  const creators = dataItem?.creators?.items ?? [];
+  const mostrarCreators = creators.slice(0, 5);
+  const creatorsLonga = creators.length > 5;
 
   return (
     <>
@@ -20,7 +29,7 @@ const CardBannerItem = ({ dataItem }: any) => {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute bottom-20 md:bottom-28 sm:bottom-20 w-full text-center items-center p-4 sm:text-center md:text-start">
+        <div className="absolute top-10 bottom-20 md:bottom-28 sm:bottom-20 w-full text-center items-center p-4 sm:text-center md:text-start">
           <ContainerItem>
             <h5 className="text-amber-500 font-bold text-3xl md:text-4xl sm:text-3xl uppercase mb-2">
               {dataItem?.title}
@@ -30,11 +39,16 @@ const CardBannerItem = ({ dataItem }: any) => {
                 className="text-white items-center text-center md:text-start sm:text-center"
                 size={16}
               />
-              Criador(es): {dataItem?.creators?.items.map(creator => creator.name).join(', ')}
+              Criador(es):{" "}
+              {mostrarCreators.map((creator) => creator?.name).join(", ")}
+              {creatorsLonga && "..."}
             </p>
-            <p className="text-white w-full font-sm md:w-2/4 sm: w-full mb-5 text-gray-300">
-              {dataItem?.description === "#N/A" ? "" : dataItem?.description}
+            <p className="text-white w-full font-sm md:w-2/4 sm:w-full mb-5 text-gray-300">
+              {mostrarDescricaoLonga
+                ? description
+                : `${description?.slice(0, 150)}${descricaoLonga ? "..." : ""}`}
             </p>
+
             <button className="bg-red-700 p-2 rounded-md w-auto text-white uppercase font-bold hover:bg-red-500 duration-300">
               {MESSAGES?.BOTAO_BANNER}
             </button>
