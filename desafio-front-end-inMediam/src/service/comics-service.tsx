@@ -11,7 +11,13 @@ import useApiInterceptor from "./interceptor";
     );
   }
 
-  return { getComics };
+  async function getComicsID(id:string) {
+    return await api.get(
+      `/comics/${id}?ts=1&apikey=${publicKey}&hash=${md5}`
+    );
+  }
+
+  return { getComics,getComicsID };
 }
 
 export default useComicsService;

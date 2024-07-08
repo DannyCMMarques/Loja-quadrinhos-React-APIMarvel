@@ -4,7 +4,7 @@ import { FrasesHomeProps } from "../../utils/interfaces/frasesHomeComponente-pro
 const FrasesHomeComponente = ({ frase }: FrasesHomeProps) => {
   return (
     <div className="w-full px-2">
-      <h5 className="text-white font-extrabold text-xl md:text-3xl sm:text-xl">
+      <h5 className="text-white uppercase font-extrabold text-xl md:text-3xl sm:text-xl">
         {frase}
       </h5>
     </div>

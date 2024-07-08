@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ContainerItem from "../../../components/container";
 import {
   FiMinus,
@@ -15,14 +15,46 @@ import CardItem from "../../../components/cards-item";
 import FrasesHomeComponente from "../../../components/frases-Home";
 import { MESSAGES } from "../../../utils/messages";
 import { GiWeight } from "react-icons/gi";
+import useComicsService from "../../../service/comics-service";
+import {
+  IoIosInformationCircle,
+  IoIosInformationCircleOutline,
+} from "react-icons/io";
+import { PiBookOpenTextThin } from "react-icons/pi";
+import useFormattedPrice from "../../../hooks/useFormatePrice";
 
 const ProdutoInfo = () => {
+  const comicService = useComicsService();
+  const [dataComics, setDataComics] = useState<any>([]);
+  const [dataAllComics, setDataAllComics] = useState<any>([]);
+
+  const creators = dataComics?.creators?.items ?? [];
+  const mostrarCreators = creators.slice(0, 5);
+  const creatorsLonga = creators.length > 8;
   const [quantidade, setQuantidade] = useState(0);
-  const [chooseImage, setChooseImage] = useState("");
-  const [selectedTab, setSelectedTab] = useState("description");
+
+  const [activePath, setActivePath] = useState(window.location.pathname);
+  const id: any = activePath.split("/").pop();
 
   const item: CardItemProps[] = livrosMock;
 
+  const getComicsID = useCallback(async () => {
+    try {
+      const comic = await comicService.getComicsID(id);
+      setDataComics(comic?.data?.results[0]);
+      return comic;
+    } catch (err) {
+      console.error("Erro ao buscar quadrinhos:", err);
+    }
+  }, [comicService]);
+  const getComics = useCallback(async () => {
+    try {
+      const comic = await comicService.getComics(20, 80);
+      setDataAllComics(comic.data.results);
+    } catch (err) {
+      console.error("Erro ao buscar quadrinhos:", err);
+    }
+  }, [comicService]);
   const handleAdicionarValor = () => {
     setQuantidade((prevQuantidade) => prevQuantidade + 1);
   };
@@ -37,6 +69,12 @@ const ProdutoInfo = () => {
     window.location.href =
       "https://buscacepinter.correios.com.br/app/endereco/index.php";
   };
+  useEffect(() => {
+    getComics();
+    getComicsID();
+  }, []);
+
+  const formattedPrice = useFormattedPrice(dataComics?.prices?.[0]?.price);
 
   return (
     <>
@@ -44,10 +82,9 @@ const ProdutoInfo = () => {
         <div className="mt-24 flex flex-col md:flex-row gap-14 px-5 md:px-0 sm:px-5 justify-center">
           <div className="flex gap-0 md:gap-16 sm:gap-0">
             <div
-              className="w-[40rem]  bg-orange-400 h-[35rem] sm:h-[35rem] md:h-[60rem]"
+              className="w-[40rem]  h-[35rem] sm:h-[35rem] md:h-[60rem]"
               style={{
-                backgroundColor: "orange",
-                backgroundImage: `url(https://i.annihil.us/u/prod/marvel/i/mg/9/30/4bc64df4105b9.jpg)`,
+                backgroundImage: `url(${dataComics?.thumbnail?.path}.${dataComics?.thumbnail?.extension})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -57,18 +94,23 @@ const ProdutoInfo = () => {
 
           <div>
             <h2 className="font-bold text-3xl mt-0 sm:mt-0 md:mt-3 uppercase text-white">
-              Homem Aranha
+              {dataComics?.title}
             </h2>
             <p className="font-medium text-md w-96 text-gray-300 uppercase">
-              Aventura, ação e ficção científica. O Homem Aranha é um dos
-              grandes!
+              Series: {dataComics?.series?.name}
             </p>
-            <p className="font-medium text-md w-96 text-white uppercase mt-4">
-              John Aranha{" "}
-            </p>
-            <div className="mt-5">
-              <h5 className="font-bold text-2xl text-orange-500">R$ 189,00</h5>
-              <p className="font-bold text-red-500">ou 9x de R$ 21,00</p>
+
+            <div className="mt-10 mb-10">
+              {dataComics?.prices && (
+                <>
+                  <h5 className="font-bold text-3xl text-orange-500">
+                    R$ {formattedPrice}
+                  </h5>
+                  <p className="font-bold text-xl text-red-500 ">
+                    ou 10x de R$ {parseInt(dataComics?.prices[0]?.price) / 10}
+                  </p>
+                </>
+              )}
             </div>
 
             <div className="flex gap-5 mt-5">
@@ -123,16 +165,20 @@ const ProdutoInfo = () => {
         <ContainerItem>
           <div className="flex w-full gap-2 sm:gap-2 md:gap-40 justify-between items-center">
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <FiBook size={24} /> Páginas: 96
+              <PiBookOpenTextThin size={28} text-white font-bold /> Páginas:{" "}
+              {dataComics?.pageCount}
             </p>
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <FiVideo size={24} /> Serie: Serie do josé
+              <IoIosInformationCircleOutline size={24} />{" "}
+              {dataComics?.isbn !== ""
+                ? `ISBN: ${dataComics?.isbn}`
+                : `Digital Id: ${dataComics.digitalId} `}
             </p>
             <p className="font-bold text-white block sm:block md:flex gap-2">
               <FiGlobe size={24} /> Idioma: English
             </p>
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <GiWeight size={24} /> Peso: 96
+              <FiBook size={24} /> Format: {dataComics?.format}
             </p>
           </div>
         </ContainerItem>
@@ -142,53 +188,36 @@ const ProdutoInfo = () => {
         <div className="mt-10 w-full px-5 md:px-0 sm:px-5 md:w-5/6 sm:w-full">
           <h5 className="text-white font-bold text-4xl uppercase">Content</h5>
           <p className="text-gray-300 mt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut
-            fugiat modi, dignissimos nam consequuntur aperiam ipsa commodi amet
-            quaerat quasi, voluptate, repellat deleniti autem! Neque quia sed
-            perspiciatis id. Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Eos aut fugiat modi, dignissimos nam consequuntur aperiam ipsa
-            commodi amet quaerat quasi, voluptate, repellat deleniti autem!
-            Neque quia sed perspiciatis id. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Eos aut fugiat modi, dignissimos nam
-            consequuntur aperiam ipsa commodi amet quaerat quasi, voluptate,
-            repellat deleniti autem! Neque quia sed perspiciatis id.
-            <br></br>
-            <br></br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut
-            fugiat modi, dignissimos nam consequuntur aperiam ipsa commodi amet
-            quaerat quasi, voluptate, repellat deleniti autem! Neque quia sed
-            perspiciatis id.
-            <br></br>
-            <br></br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut
-            fugiat modi, dignissimos nam consequuntur aperiam ipsa commodi amet
-            quaerat quasi, voluptate, repellat deleniti autem! Neque quia sed
-            perspiciatis id.
+            {dataComics?.description === ""
+              ? "This comic don't have a description"
+              : dataComics?.description}
           </p>
         </div>
         <div className="mt-10 w-full px-5 md:px-0 sm:px-5 md:w-5/6 sm:w-full">
           <h5 className="text-amber-400 font-bold text-4xl uppercase">
             Creator
           </h5>
-          <p className="text-gray-300 mt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aut
-            fugiat modi, dignissimos nam consequuntur aperiam ipsa commodi amet
-            quaerat quasi, voluptate, repellat deleniti autem! Neque quia sed
-            perspiciatis id.
-          </p>
+          <ul className="text-gray-300 mt-2">
+            {dataComics?.creators?.items?.map((creator) => (
+              <li key={creator.resourceURI}>
+                <span className="text-white font-bold">{creator.name}</span> -{" "}
+                {creator.role}
+              </li>
+            ))}
+          </ul>
         </div>
         <hr className="mt-10"></hr>
         <div className="py-5 mt-5">
           <div className="w-full  mb-5">
-            <FrasesHomeComponente frase={MESSAGES.FRASE_2_HOME} />
+            <FrasesHomeComponente frase={MESSAGES.FRASE_PAGE_INFO} />
           </div>
-          {/* <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+          <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
             <SwiperComponent quantItemMobile={2} quantItems={5}>
-              {item.map((item) => (
+              {dataAllComics.map((item) => (
                 <CardItem key={item.id} dataItem={item} />
               ))}
             </SwiperComponent>
-          </div> */}
+          </div>
         </div>
       </ContainerItem>
     </>
