@@ -1,0 +1,21 @@
+import useApiInterceptor from "./interceptor";
+
+ function useCharactersService() {
+  const api = useApiInterceptor();
+  const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+  const md5 = import.meta.env.VITE_MD5_HASH;
+
+  async function getBestCharacters(limite?: number=20, offset?: number=0) {
+    return await api.get(
+      `/characters/1011334/comics?ts=1&apikey=${publicKey}&hash=${md5}&limit=${limite}&offset=${offset}`
+    );
+  }
+  async function getAncientOne(limite?: number=20, offset?: number=0) {
+    return await api.get(
+      `/characters/1009152/comics?ts=1&apikey=${publicKey}&hash=${md5}&limit=${limite}&offset=${offset}`
+    );
+  }
+  return { getBestCharacters, getAncientOne };
+}
+
+export default useCharactersService;
