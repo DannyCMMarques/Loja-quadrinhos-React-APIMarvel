@@ -4,9 +4,10 @@ import ImageCard from "../image-card";
 
 const DestaqueComponente = () => {
   const mock = DestaqueMock;
+
   return (
     <div className="w-full">
-      <div className="flex gap-x-5 w-full">
+      <div className="flex gap-x-5 w-96 h-96">
         <ImageCard
           imageUrl={mock[4]?.imagemCartoon}
           width="[85rem]"

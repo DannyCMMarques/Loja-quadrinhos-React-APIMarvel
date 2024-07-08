@@ -182,13 +182,13 @@ const ProdutoInfo = () => {
           <div className="w-full  mb-5">
             <FrasesHomeComponente frase={MESSAGES.FRASE_2_HOME} />
           </div>
-          <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+          {/* <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
             <SwiperComponent quantItemMobile={2} quantItems={5}>
               {item.map((item) => (
                 <CardItem key={item.id} dataItem={item} />
               ))}
             </SwiperComponent>
-          </div>
+          </div> */}
         </div>
       </ContainerItem>
     </>

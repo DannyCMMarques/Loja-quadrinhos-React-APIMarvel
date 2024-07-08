@@ -6,9 +6,9 @@ export const MESSAGES = {
   BOTAO_COMPRAR_CARD_ITEM: "Quick Buy",
   BOTAO_BANNER: "Check out this comic",
   FRASE_1_HOME: "Find your comic now",
-  FRASE_2_HOME: "The best Spider-Man comics",
-  FRASE_3_HOME: "Discover the Author’s Works",
-  FRASE_4_HOME: "All about the Avengers Universe",
+  FRASE_2_HOME: "The best 3D-MAN comics",
+  FRASE_3_HOME: "Discover the All Thumbs Creative",
+  FRASE_4_HOME: "All about the Ancient One ",
   FRASE_HOME_DESTAQUE: "Monthly Highlights",
   FRASE_COMICS: "Comics",
 };

@@ -6,7 +6,8 @@ const ImageCard = ({ imageUrl, width, height, cursor }: ImageCardInterface) => {
     <div
       className={`w-${width} h-${height} hover:opacity-75 duration-100`}
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundColor:'imageUrl',
+        // backgroundImage: `url(${imageUrl})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
