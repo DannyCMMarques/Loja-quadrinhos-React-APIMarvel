@@ -8,13 +8,19 @@ import ProdutoInfo from "./pages/produtos/produtos-info";
 function App() {
   return (
     <>
-     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/comics" element={<ProductList />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/comics/:id" element={<ProdutoInfo />} />
-        </Routes>
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/comics" element={<ProductList />} />
+            <Route path="/series" element={<ProductList />} />
+            <Route path="/series/:id" element={<ProductList />} />
+            <Route path="/characters/:id" element={<ProductList />} />
+            <Route path="/creators/:id" element={<ProductList />} />
+            <Route path="/characters" element={<ProductList />} />
+            <Route path="/creators" element={<ProductList />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/comics/:id" element={<ProdutoInfo />} />
+          </Routes>
       </BrowserRouter>
     </>
   );
