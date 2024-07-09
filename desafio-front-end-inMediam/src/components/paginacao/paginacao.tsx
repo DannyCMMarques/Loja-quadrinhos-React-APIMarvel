@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 
-const Paginacao = ({ onPageChange, totalPages }) => {
+const Paginacao = ({
+  QuantidadeItems,
+  onChangePage,
+  numeroTotalDePagina,
+  onLimitChange,
+}) => {
   const [pagina, setPagina] = useState(1);
-  const [itemsPorPagina, setItemsPorPagina] = useState(20);
-  const [visiblePages, setPaginasVisiveis] = useState([]);
-  const itemsPorPaginaOpcoes = [20, 40, 60, 80, 100];
+  const [paginasVisiveis, setPaginasVisiveis] = useState([]);
+  const [novoLimite, setNovoLimite] = useState(20);
+  const valores = [20, 40, 60, 80, 100];
+
+  useEffect(() => {
+    setPagina(1);
+  }, []);
 
   useEffect(() => {
     atualizarPaginasVisiveis();
-  }, [pagina, totalPages]);
+  }, [pagina, numeroTotalDePagina]);
 
   const atualizarPaginasVisiveis = () => {
     const maximoDePaginas = 5;
     let paginaInicial = Math.max(1, pagina - 2);
-    let paginaFinal = Math.min(totalPages, paginaInicial + maximoDePaginas - 1);
+    let paginaFinal = Math.min(numeroTotalDePagina, paginaInicial + maximoDePaginas - 1);
 
     const paginasArray = [];
     for (let i = paginaInicial; i <= paginaFinal; i++) {
@@ -27,28 +36,24 @@ const Paginacao = ({ onPageChange, totalPages }) => {
     if (pagina !== 1) {
       const newPage = pagina - 1;
       setPagina(newPage);
-      onPageChange(newPage);
+      onChangePage(newPage);
     }
   };
 
   const paginaSeguinte = () => {
-    if (pagina !== totalPages) {
+    if (pagina !== numeroTotalDePagina) {
       const newPage = pagina + 1;
       setPagina(newPage);
-      onPageChange(newPage);
+      onChangePage(newPage);
     }
   };
 
-  const handlePage = (pageNumber) => {
-    setPagina(pageNumber);
-    onPageChange(pageNumber);
-  };
-
-  const handleItemsPorPagina = (e) => {
-    const novosItensPorPagina = parseInt(e.target.value, 10);
-    setItemsPorPagina(novosItensPorPagina);
-    onPageChange(1);
+  const handleChangeLimit = (event) => {
+    const novoLimiteValue = parseInt(event.target.value, 10);
+    setNovoLimite(novoLimiteValue);
     setPagina(1);
+    onChangePage(1);
+    onLimitChange(novoLimiteValue);
   };
 
   return (
@@ -57,7 +62,7 @@ const Paginacao = ({ onPageChange, totalPages }) => {
         <ul className="flex space-x-2">
           <li>
             <button
-              className={`px-3  rounded-md focus:outline-none items-center ${
+              className={`px-3 rounded-md focus:outline-none items-center ${
                 pagina === 1 ? "cursor-not-allowed" : "hover:bg-red-600"
               }`}
               type="button"
@@ -67,31 +72,34 @@ const Paginacao = ({ onPageChange, totalPages }) => {
               <BsChevronDoubleLeft className="text-white" />
             </button>
           </li>
-          {visiblePages.map((pageNumber) => (
-            <li key={pageNumber}>
+          {paginasVisiveis.map((numeroDePagina) => (
+            <li key={numeroDePagina}>
               <button
-                className={`px-4  rounded-md focus:outline-none ${
-                  pagina === pageNumber
+                className={`px-4 rounded-md focus:outline-none ${
+                  pagina ===numeroDePagina
                     ? "bg-red-500 text-white"
                     : "text-gray-300 hover:bg-red-500 hover:text-white"
                 }`}
                 type="button"
-                onClick={() => handlePage(pageNumber)}
+                onClick={() => {
+                  setPagina(numeroDePagina);
+                  onChangePage(numeroDePagina);
+                }}
               >
-                {pageNumber}
+                {numeroDePagina}
               </button>
             </li>
           ))}
           <li>
             <button
               className={`px-3 py-1 rounded-md focus:outline-none ${
-                pagina === totalPages
+                pagina === numeroTotalDePagina
                   ? "cursor-not-allowed"
                   : "hover:bg-red-600"
               }`}
               type="button"
               onClick={paginaSeguinte}
-              disabled={pagina === totalPages}
+              disabled={pagina === numeroTotalDePagina}
             >
               <BsChevronDoubleRight className="text-white" />
             </button>
@@ -101,12 +109,12 @@ const Paginacao = ({ onPageChange, totalPages }) => {
       <div className="mt-4 sm:mt-0">
         <select
           className="px-2 py-1 border-none bg-transparent text-white border-gray-300 rounded-md focus:outline-none"
-          value={itemsPorPagina}
-          onChange={handleItemsPorPagina}
+          value={novoLimite}
+          onChange={handleChangeLimit}
         >
-          {itemsPorPaginaOpcoes.map((option) => (
-            <option key={option} className="text-black" value={option}>
-              {option}
+          {valores.map((valores, index) => (
+            <option key={index} value={valores}>
+              {valores}
             </option>
           ))}
         </select>
