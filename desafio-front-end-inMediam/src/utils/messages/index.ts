@@ -10,6 +10,5 @@ export const MESSAGES = {
   FRASE_3_HOME: "Discover the All Thumbs Creative",
   FRASE_4_HOME: "All about the Ancient One ",
   FRASE_HOME_DESTAQUE: "Monthly Highlights",
-  FRASE_COMICS: "Comics",
   FRASE_PAGE_INFO: "Maybe you like it",
 };
