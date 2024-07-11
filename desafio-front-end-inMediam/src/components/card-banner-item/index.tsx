@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ContainerItem from "../container";
 import { FaUser } from "react-icons/fa6";
 import { MESSAGES } from "./../../utils/messages/index";
-import { CardBannerHeroProps } from "../../utils/interfaces/card-banner-hero";
 
 const CardBannerItem = ({ dataItem }: any) => {
   const [mostrarDescricaoLonga, setMostrarDescricaoLonga] = useState(false);
@@ -21,12 +20,13 @@ const CardBannerItem = ({ dataItem }: any) => {
         className="relative w-full h-96"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #171717 25%, transparent 70%),
+            linear-gradient(to right, #171717 -2%, transparent 70%),
             linear-gradient(to top, #171717 10%, transparent 90%),
             url(${dataItem?.thumbnail?.path}.${dataItem?.thumbnail?.extension})
           `,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundPositionX: "100%",
+          backgroundSize: "50%",
         }}
       >
         <div className="absolute top-10 bottom-20 md:bottom-28 sm:bottom-20 w-full text-center items-center p-4 sm:text-center md:text-start">
@@ -34,7 +34,7 @@ const CardBannerItem = ({ dataItem }: any) => {
             <h5 className="text-amber-500 font-bold text-3xl md:text-4xl sm:text-3xl uppercase mb-2">
               {dataItem?.title}
             </h5>
-            <p className="text-white w-2/4 flex gap-2  mb-2 justify-center md:justify-start sm:justify-center">
+            <p className="text-white flex w-fullflex gap-2 sm:w-full md:2/4 mb-2 justify-center md:justify-start sm:justify-center">
               <FaUser
                 className="text-white items-center text-center md:text-start sm:text-center"
                 size={16}

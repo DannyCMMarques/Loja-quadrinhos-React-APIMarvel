@@ -37,10 +37,6 @@ const CardItem = ({ dataItem }: any) => {
                 >
                   {MESSAGES.BOTAO_CARD_ITEM}
                 </button>
-                <p className="text-white items-center justify-center font-bold uppercase text-xs flex gap-1 hover:text-amber-500 mt-5 text-center">
-                  {MESSAGES.BOTAO_COMPRAR_CARD_ITEM}
-                  <FaBasketShopping size={16} />
-                </p>
               </div>
             </div>
           </div>

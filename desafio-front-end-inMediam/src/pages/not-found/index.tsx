@@ -1,6 +1,7 @@
 import React from "react";
 import ContainerItem from "../../components/container";
 import { CiWarning } from "react-icons/ci";
+import { MESSAGES } from "../../utils/messages";
 
 const NotFound = () => {
   return (
@@ -10,7 +11,7 @@ const NotFound = () => {
           <CiWarning className="text-7xl text-white" size={44} />
         </div>
         <h5 className="flex justify-center text-amber-400 mt-5">
-          Ops! página não encontrada
+        {MESSAGES.PAGINA_NAO_ENCONTRADA}
         </h5>
       </div>
     </ContainerItem>

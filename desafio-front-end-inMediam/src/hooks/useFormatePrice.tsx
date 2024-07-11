@@ -5,9 +5,9 @@ const useFormattedPrice = (price: number | undefined | null) => {
 
   useEffect(() => {
     if (price !== undefined && price !== null && !isNaN(price)) {
-      const formatted = price.toLocaleString('pt-BR', {
+      const formatted = price.toLocaleString('en-US', {
         style: 'currency',
-        currency: 'BRL',
+        currency: 'USD',
       });
       setFormattedPrice(formatted);
     } else {
