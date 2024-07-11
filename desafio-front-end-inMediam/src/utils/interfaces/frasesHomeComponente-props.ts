@@ -1,3 +1,3 @@
 export interface FrasesHomeProps {
-  frase: string;
+  frase: any;
 }
