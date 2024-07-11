@@ -7,24 +7,26 @@ import { useLocation } from "react-router-dom";
 import Paginacao from "../../../components/paginacao/paginacao";
 import useProductListService from "../../../service/product-list-service";
 import CardRadioItem from "../../../components/card-radio-items";
+import Loading from "../../../components/loading";
+import { MESSAGES } from "../../../utils/messages";
 
 const ProductList = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [totalItens, setTotalItens] = useState(0);
   const [limite, setLimite] = useState(20);
   const [dataCardItem, setDataCardItem] = useState([]);
   const [dataRadioItem, setRadioItem] = useState([]);
+  const [resourceId, setResourceId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+
   const idsDefault = {
     characters: 1011334,
     series: 29696,
   };
 
-  const [resourceId, setResourceId] = useState(null);
-  const [currentPage, setCurrentPage] = useState(0);
-
   const parametroUrl = useLocation();
   const parametroArray = parametroUrl.pathname.split("/");
-
-  const serviceProductList = useProductListService();
+  const tipoPagina = parametroArray.length > 1 ? parametroArray[1] : "";
 
   useEffect(() => {
     if (parametroArray.length > 2) {
@@ -32,35 +34,34 @@ const ProductList = () => {
     }
   }, [parametroArray]);
 
-  const resourceType = parametroArray.length > 1 ? parametroArray[1] : "";
+  const serviceProductList = useProductListService();
 
   const getAllItems = useCallback(
     async (page = 0, limit = 20) => {
+      setIsLoading(true);
       try {
         let cardItemData;
         let cardRadioItem = await serviceProductList.getACategoriesTodas(
-          resourceType,
+          tipoPagina,
           limit,
           page
         );
         setRadioItem(cardRadioItem?.data?.results || []);
 
-        if (resourceType === "comics") {
+        if (tipoPagina === "comics") {
           cardItemData = await serviceProductList.getACategoriesTodas(
-            resourceType,
+            tipoPagina,
             limit,
             page
           );
-        } else if (resourceType === "characters" || resourceType === "series") {
-          const defaultIds = idsDefault;
-
+        } else if (tipoPagina === "characters" || tipoPagina === "series") {
           const resolvedResourceId =
             parametroArray[2] === undefined
-              ? defaultIds[resourceType]
+              ? idsDefault[tipoPagina]
               : parseInt(parametroArray[2]);
 
           cardItemData = await serviceProductList.getCategoriesID(
-            resourceType,
+            tipoPagina,
             resolvedResourceId,
             limit,
             page
@@ -71,26 +72,29 @@ const ProductList = () => {
         setDataCardItem(cardItemData?.data?.results || []);
       } catch (err) {
         console.error("Erro ao buscar itens:", err);
+      } finally {
+        setIsLoading(false);
       }
     },
-    [serviceProductList, resourceType, parametroArray]
+    [serviceProductList, tipoPagina, idsDefault]
   );
 
   useEffect(() => {
     getAllItems(currentPage, limite);
-  }, [currentPage, limite, parametroArray]);
+  }, [currentPage, limite, tipoPagina, resourceId]);
 
   const handleChangePage = (page) => {
     setCurrentPage(page - 1);
   };
 
-  const handleSetLimit = (limitao) => {
+  const handleSetLimite = (limitao) => {
     setLimite(limitao);
     setCurrentPage(0);
   };
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className="w-full mt-24 md:mt-20 sm:mt-24">
         <div
           className="relative w-full h-72 -z-20"
@@ -106,19 +110,21 @@ const ProductList = () => {
         ></div>
         <div className="z-20 -mt-44">
           <ContainerItem>
-            {resourceType !== "comics" && (
+            {tipoPagina !== "comics" && (
               <>
                 <div className="w-full mt-12 md:mt-12 sm:mt-12 mb-5 z-20">
                   <CardRadioItem
                     dataItem={dataRadioItem}
-                    categorias={resourceType}
+                    categorias={tipoPagina}
                   />
                 </div>
               </>
             )}
 
             <div className="w-full mt-12 md:mt-12 sm:mt-12 mb-5 z-20">
-              <FrasesHomeComponente frase={`Choose the best ${resourceType}`} />
+              <FrasesHomeComponente
+                frase={`${MESSAGES.TITULO_PAG_PRODUTO_LISTA} ${tipoPagina}`}
+              />
             </div>
             <div className="w-full grid gap-4 px-2 mt-15 grid-cols-2 sm:grid-cols-2 md:grid-cols-5">
               {dataCardItem?.map((item) => (
@@ -132,7 +138,7 @@ const ProductList = () => {
                   QuantidadeItems={totalItens}
                   onChangePage={handleChangePage}
                   numeroTotalDePagina={Math.ceil(totalItens / limite)}
-                  onLimitChange={handleSetLimit}
+                  onLimitChange={handleSetLimite}
                 />
               </div>
             )}

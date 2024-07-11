@@ -1,67 +1,71 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import ContainerItem from "../../../components/container";
-import {
-  FiMinus,
-  FiPlus,
-  FiSearch,
-  FiBook,
-  FiVideo,
-  FiGlobe,
-} from "react-icons/fi";
-import SwiperComponent from "../../../components/swiper";
-import { livrosMock } from "../../../utils/mocks/livros";
-import { CardItemProps } from "../../../utils/interfaces/card-item-props";
-import CardItem from "../../../components/cards-item";
-import FrasesHomeComponente from "../../../components/frases-Home";
-import { MESSAGES } from "../../../utils/messages";
-import { GiWeight } from "react-icons/gi";
-import useComicsService from "../../../service/comics-service";
-import {
-  IoIosInformationCircle,
-  IoIosInformationCircleOutline,
-} from "react-icons/io";
-import { PiBookOpenTextThin } from "react-icons/pi";
+import { FiMinus, FiPlus, FiSearch } from "react-icons/fi";
+import { UseItensCarrinhoContext } from "./../../../utils/context/useItensCarrinho";
 import useFormattedPrice from "../../../hooks/useFormatePrice";
+import useComicsService from "../../../service/comics-service";
+import SwiperComponent from "../../../components/swiper";
+import CardItem from "../../../components/cards-item";
+import Loading from "../../../components/loading";
+import { MESSAGES } from "../../../utils/messages";
+import { FaBook, FaBookOpen } from "react-icons/fa6";
+import { BiWorld } from "react-icons/bi";
+import { IoMdInformationCircleOutline } from "react-icons/io";
+import FrasesHomeComponente from "../../../components/frases-Home";
 
 const ProdutoInfo = () => {
-  const comicService = useComicsService();
-  const [dataComics, setDataComics] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { itensCarrinhos, adicionarItemCarrinho } = useContext(
+    UseItensCarrinhoContext
+  );
+
   const [dataAllComics, setDataAllComics] = useState<any>([]);
+  const [dataComics, setDataComics] = useState<any>({});
 
-  const creators = dataComics?.creators?.items ?? [];
-  const mostrarCreators = creators.slice(0, 5);
-  const creatorsLonga = creators.length > 8;
-  const [quantidade, setQuantidade] = useState(0);
-
+  const [quantidade, setQuantidade] = useState(1);
   const [activePath, setActivePath] = useState(window.location.pathname);
+
   const id: any = activePath.split("/").pop();
 
-  const item: CardItemProps[] = livrosMock;
+  const comicService = useComicsService();
 
   const getComicsID = useCallback(async () => {
+    setIsLoading(true);
     try {
       const comic = await comicService.getComicsID(id);
       setDataComics(comic?.data?.results[0]);
+      setIsLoading(false);
       return comic;
     } catch (err) {
+      setIsLoading(false);
       console.error("Erro ao buscar quadrinhos:", err);
     }
   }, [comicService]);
+
   const getComics = useCallback(async () => {
+    setIsLoading(true);
     try {
       const comic = await comicService.getComics(20, 80);
       setDataAllComics(comic.data.results);
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       console.error("Erro ao buscar quadrinhos:", err);
     }
   }, [comicService]);
+
+  useEffect(() => {
+    getComics();
+    getComicsID();
+  }, []);
+
   const handleAdicionarValor = () => {
     setQuantidade((prevQuantidade) => prevQuantidade + 1);
   };
 
   const handleRemoverValor = () => {
     setQuantidade((prevQuantidade) =>
-      prevQuantidade > 0 ? prevQuantidade - 1 : 0
+      prevQuantidade > 1 ? prevQuantidade - 1 : 1
     );
   };
 
@@ -69,15 +73,28 @@ const ProdutoInfo = () => {
     window.location.href =
       "https://buscacepinter.correios.com.br/app/endereco/index.php";
   };
-  useEffect(() => {
-    getComics();
-    getComicsID();
-  }, []);
 
   const formattedPrice = useFormattedPrice(dataComics?.prices?.[0]?.price);
 
+  const handleComprar = () => {
+    const item = {
+      id: dataComics?.id,
+      title: dataComics?.title,
+      price:
+        dataComics?.prices[0]?.price === 0 ? 5.99 : dataComics?.prices[0].price,
+      amount: quantidade,
+      thumbnail: {
+        path: dataComics?.thumbnail?.path,
+        extension: dataComics?.thumbnail?.extension,
+      },
+    };
+
+    adicionarItemCarrinho(item);
+  };
+
   return (
     <>
+      {isLoading && <Loading />}
       <ContainerItem>
         <div className="mt-24 flex flex-col md:flex-row gap-14 px-5 md:px-0 sm:px-5 justify-center">
           <div className="flex gap-0 md:gap-16 sm:gap-0">
@@ -104,10 +121,17 @@ const ProdutoInfo = () => {
               {dataComics?.prices && (
                 <>
                   <h5 className="font-bold text-3xl text-orange-500">
-                    R$ {formattedPrice}
+                    {dataComics?.prices[0]?.price === 0
+                      ? "$" + 5.99
+                      : formattedPrice}
                   </h5>
                   <p className="font-bold text-xl text-red-500 ">
-                    ou 10x de R$ {parseInt(dataComics?.prices[0]?.price) / 10}
+                    {dataComics?.prices[0]?.price === 0
+                      ? MESSAGES.PAGE_PRODUTO_INFO.PARCELAS + "0.59"
+                      : MESSAGES.PAGE_PRODUTO_INFO.PARCELAS +
+                        (parseFloat(dataComics?.prices[0]?.price) / 10).toFixed(
+                          2
+                        )}
                   </p>
                 </>
               )}
@@ -119,15 +143,22 @@ const ProdutoInfo = () => {
               </button>
               <input
                 className="w-16 h-12 text-center border-none font-bold rounded-sm"
-                readOnly
+                type="number"
+                min="1"
                 value={quantidade}
+                onChange={(e) => {
+                  setQuantidade(Math.max(1, parseInt(e.target.value)));
+                }}
               />
               <button onClick={handleAdicionarValor}>
                 <FiPlus size={20} className="text-white" />
               </button>
               <div className="">
-                <button className="bg-red-600 rounded-md hover:bg-red-500 duration-100 text-white p-3 w-full">
-                  Adicionar na sacola
+                <button
+                  onClick={handleComprar}
+                  className="bg-red-600 rounded-md hover:bg-red-500 duration-100 text-white p-3 w-full"
+                >
+                  {MESSAGES.PAGE_PRODUTO_INFO.ADICIONAR_AO_CARRINHO}
                 </button>
               </div>
             </div>
@@ -160,42 +191,44 @@ const ProdutoInfo = () => {
           </div>
         </div>
       </ContainerItem>
-
-      <div className="bg-red-600 w-full  h-24 mt-8 hidden sm:hidden md:flex justify-center items-center">
+      <div className="bg-red-600 w-full h-24 mt-8 hidden sm:hidden md:flex justify-center items-center">
         <ContainerItem>
           <div className="flex w-full gap-2 sm:gap-2 md:gap-40 justify-between items-center">
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <PiBookOpenTextThin size={28} text-white font-bold /> Páginas:{" "}
-              {dataComics?.pageCount}
+              <FaBookOpen size={20} className="text-white" />{" "}
+              {MESSAGES.PAGE_PRODUTO_INFO.PAGINAS}: {dataComics?.pageCount}
             </p>
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <IoIosInformationCircleOutline size={24} />{" "}
+              <IoMdInformationCircleOutline size={20} className="text-white" />{" "}
               {dataComics?.isbn !== ""
                 ? `ISBN: ${dataComics?.isbn}`
-                : `Digital Id: ${dataComics.digitalId} `}
+                : `Digital Id: ${dataComics.digitalId}`}
             </p>
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <FiGlobe size={24} /> Idioma: English
+              <BiWorld size={20} className="text-white" />{" "}
+              {MESSAGES.PAGE_PRODUTO_INFO.IDIOMA}: English
             </p>
             <p className="font-bold text-white block sm:block md:flex gap-2">
-              <FiBook size={24} /> Format: {dataComics?.format}
+              <FaBook size={20} className="text-white" />{" "}
+              {MESSAGES.PAGE_PRODUTO_INFO.FORMATO}: {dataComics?.format}
             </p>
           </div>
         </ContainerItem>
       </div>
-
       <ContainerItem>
         <div className="mt-10 w-full px-5 md:px-0 sm:px-5 md:w-5/6 sm:w-full">
-          <h5 className="text-white font-bold text-4xl uppercase">Content</h5>
+          <h5 className="text-white font-bold text-4xl uppercase">
+            {MESSAGES.PAGE_PRODUTO_INFO.CONTEUDO}
+          </h5>
           <p className="text-gray-300 mt-2">
             {dataComics?.description === ""
-              ? "This comic don't have a description"
+              ? MESSAGES.PAGE_PRODUTO_INFO.SEM_DESCRICAO
               : dataComics?.description}
           </p>
         </div>
         <div className="mt-10 w-full px-5 md:px-0 sm:px-5 md:w-5/6 sm:w-full">
           <h5 className="text-amber-400 font-bold text-4xl uppercase">
-            Creator
+            {MESSAGES.CRIADOR}
           </h5>
           <ul className="text-gray-300 mt-2">
             {dataComics?.creators?.items?.map((creator) => (
@@ -208,8 +241,8 @@ const ProdutoInfo = () => {
         </div>
         <hr className="mt-10"></hr>
         <div className="py-5 mt-5">
-          <div className="w-full  mb-5">
-            <FrasesHomeComponente frase={MESSAGES.FRASE_PAGE_INFO} />
+          <div className="mb-4 text-white uppercase font-extrabold text-xl md:text-3xl sm:text-xl">
+            {MESSAGES.PAGE_PRODUTO_INFO.VEJA_MAIS_OPCOES}
           </div>
           <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
             <SwiperComponent quantItemMobile={2} quantItems={5}>

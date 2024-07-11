@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import logo from "/Marvel_Logo.svg";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
 import menuContentItens from "../../utils/content/menuContentItens";
+import { UseItensCarrinhoContext } from "../../utils/context/useItensCarrinho";
 const Navbar = () => {
+  const { itensCarrinhos } = useContext(UseItensCarrinhoContext);
+
   const [activePath, setActivePath] = useState(window.location.pathname);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -81,7 +84,7 @@ const Navbar = () => {
                     className="hover:text-red-800 text-white"
                   />
                   <div className="bg-red-800 rounded-full h-5 px-2 right-5 items-center text-center text-sm text-white relative">
-                    <p>1</p>
+                    <p>{itensCarrinhos.length}</p>
                   </div>
                 </a>
               </div>
@@ -131,7 +134,7 @@ const Navbar = () => {
                       className="hover:text-red-800 hover:font-bold  text-white"
                     />
                     <div className="bg-red-800 rounded-full h-5 px-2 right-5 items-center text-center text-sm text-white relative">
-                      <p>1</p>
+                      <p>{itensCarrinhos.length}</p>
                     </div>
                   </a>
                   <a className="flex gap-4 text-lg" href="/dashboard">
