@@ -1,17 +1,23 @@
 import React from "react";
-import { ImageCardInterface } from "../../utils/interfaces/image-card-interface";
 
-const ImageCard = ({ imageUrl, width, height, cursor }: ImageCardInterface) => {
+const ImageCard = ({ index, dataCard }: ImageCardInterface) => {
+  const imageUrl = `${dataCard?.data[index]?.thumbnail.path}.${dataCard?.data[index]?.thumbnail.extension}`;
+
+  const handleRedirect = () => {
+    window.location.href = `/comics/${dataCard?.data[index]?.id}`;
+    console.log("funcionou");
+  };
+
   return (
     <div
-      className={`w-${width} h-${height} hover:opacity-75 duration-100`}
+      onClick={handleRedirect}
+      className="w-full h-full hover:opacity-75 duration-100"
       style={{
-        backgroundColor: "imageUrl",
-        // backgroundImage: `url(${imageUrl})`,
+        backgroundImage: `url(${imageUrl})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        cursor: `${cursor}`,
+        cursor: "pointer",
       }}
     ></div>
   );

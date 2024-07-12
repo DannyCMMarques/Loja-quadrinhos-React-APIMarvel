@@ -124,8 +124,8 @@ const Index = () => {
                 <div className="w-full mb-5">
                   <FrasesHomeComponente frase={MESSAGES.FRASE_HOME_DESTAQUE} />
                 </div>
-                <div className="w-96 h-96">
-                  <DestaqueComponente />
+                <div className="w-full h-[33rem] ">
+                  <DestaqueComponente data={dataComics} />
                 </div>
               </div>
 
