@@ -2,8 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import { FiMinus, FiPlus, FiTrash } from "react-icons/fi";
 import { UseItensCarrinhoContext } from "../../utils/context/useItensCarrinho";
 import useFormattedPrice from "../../hooks/useFormatePrice";
+import { MESSAGES } from "../../utils/messages";
+import { ItemCarrinhoProps } from "../../utils/interfaces/pages/carrinho-compra";
 
-const ItemCarrinho = ({ data, valorAtualizado }) => {
+const ItemCarrinho = ({ data, valorAtualizado }: ItemCarrinhoProps) => {
   const { removerItemCarrinho } = useContext(UseItensCarrinhoContext);
   const [quantidade, setQuantidade] = useState(data?.item?.amount || 1);
   const formattedPrice = useFormattedPrice(data?.item?.price);
@@ -46,11 +48,15 @@ const ItemCarrinho = ({ data, valorAtualizado }) => {
             }}
           ></div>
           <div className="flex flex-col items-start w-36">
-            <h5 className="font-bold text-sm text-white">Produto:</h5>
+            <h5 className="font-bold text-sm text-white">
+              {MESSAGES.CARRINHO_COMPRA.PRODUTO}:
+            </h5>
             <span className="font-medium text-white">{data?.item?.title}</span>
           </div>
           <div className="flex flex-col items-start w-24">
-            <h5 className="font-bold text-sm">Preço:</h5>
+            <h5 className="font-bold text-sm">
+              {MESSAGES.CARRINHO_COMPRA.PRECO}:
+            </h5>
             <span className="font-medium">{formattedPrice}</span>
           </div>
           <div className="flex gap-5 items-center">
@@ -64,7 +70,8 @@ const ItemCarrinho = ({ data, valorAtualizado }) => {
               value={quantidade}
               onChange={(e) => {
                 const novaQuantidade = Math.max(1, parseInt(e.target.value));
-                const calculo = (novaQuantidade - quantidade) * data?.item?.price;
+                const calculo =
+                  (novaQuantidade - quantidade) * data?.item?.price;
                 setQuantidade(novaQuantidade);
                 valorAtualizado(calculo);
               }}

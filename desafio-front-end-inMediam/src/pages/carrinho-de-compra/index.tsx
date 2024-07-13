@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import ContainerItem from "../../components/container";
 import ItemCarrinho from "../../components/item-carrinho-compra";
@@ -7,25 +6,30 @@ import { FaCartArrowDown } from "react-icons/fa6";
 import Modal from "../../components/modal";
 import FormComponent from "../../components/form-pagamento";
 import { MESSAGES } from "../../utils/messages";
+import { DataItensFinalizarCompra, ItemCarrinhoProps } from "../../utils/interfaces/pages/carrinho-compra";
 
 const CarrinhoDeCompra = () => {
-  const { itensCarrinhos } = useContext(UseItensCarrinhoContext);
-  const [valorTotal, setValorTotal] = useState(0);
-  const [dataFormFinalizarCompra, setDataFormFinalizarCompra] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
-  const [valorFrete, setValorFrete] =useState(0);
 
-  const handleValorAtualizado = (valor: any) => {
+  const { itensCarrinhos } = useContext(UseItensCarrinhoContext) as { itensCarrinhos: ItemCarrinhoProps[] };
+
+  const [valorTotal, setValorTotal] = useState<number>(0);
+  const [dataFormFinalizarCompra, setDataFormFinalizarCompra] = useState<DataItensFinalizarCompra | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [valorFrete, setValorFrete] = useState<number>(0);
+
+  const handleValorAtualizado = (valor: number) => {
     setValorTotal(valorTotal + valor);
   };
 
   const handleValorCep = () => {
-    const frete = JSON.parse(localStorage.getItem("frete"));
-    if (frete && frete?.frete?.valor) {
-      const valorFreteString = frete?.frete?.valor.replace("$", "").trim();
-      const valorFreteNumero = parseInt(valorFreteString);
-      setValorFrete(valorFreteNumero);
-    } else {
+    const frete = localStorage.getItem("frete");
+    if (frete) {
+      const parsedFrete = JSON.parse(frete);
+      if (parsedFrete?.frete?.valor) {
+        const valorFreteString = parsedFrete.frete.valor.replace("$", "").trim();
+        const valorFreteNumero = parseFloat(valorFreteString);
+        setValorFrete(valorFreteNumero);
+      }
     }
   };
 
@@ -35,7 +39,7 @@ const CarrinhoDeCompra = () => {
       let total = 0;
       itensCarrinhos.forEach((item) => {
         if (item?.item?.price && item?.item?.amount) {
-          total += item?.item?.price * item?.item?.amount;
+          total += item.item.price * item.item.amount;
         }
       });
       return total;
@@ -44,9 +48,9 @@ const CarrinhoDeCompra = () => {
   }, [itensCarrinhos]);
 
   const handleOpenModal = () => {
-    const dataItensFinalizar: any = {
-      valorTotal: valorTotal,
-      totalItens: itensCarrinhos.item,
+    const dataItensFinalizar: DataItensFinalizarCompra = {
+      valorTotal,
+      totalItens: itensCarrinhos,
     };
     setDataFormFinalizarCompra(dataItensFinalizar);
     setIsOpen(true);
@@ -55,13 +59,16 @@ const CarrinhoDeCompra = () => {
   const handleCloseModal = () => {
     setIsOpen(false);
   };
+
   return (
     <>
-      <Modal size="small" isOpen={isOpen}>
-        <FormComponent
-          dataItensCarrinho={dataFormFinalizarCompra}
-          onClose={handleCloseModal}
-        />
+      <Modal isOpen={isOpen}>
+        {dataFormFinalizarCompra && (
+          <FormComponent
+            dataItensCarrinho={dataFormFinalizarCompra}
+            onClose={handleCloseModal}
+          />
+        )}
       </Modal>
 
       <div className="w-full mt-16 md:mt-20 sm:mt-16 fle">
@@ -69,13 +76,12 @@ const CarrinhoDeCompra = () => {
           {itensCarrinhos.length > 0 ? (
             <>
               <h5 className="font-bold items-center text-white mb-2 text-xl">
-
-                {MESSAGES.TITULO_PAG_CARRINHO}
+                {MESSAGES.CARRINHO_COMPRA.TITULO_PAG_CARRINHO}
               </h5>
               {itensCarrinhos.map((item) => (
                 <ItemCarrinho
                   valorAtualizado={handleValorAtualizado}
-                  key={item?.id}
+                  key={item.id}
                   data={item}
                 />
               ))}
@@ -95,7 +101,7 @@ const CarrinhoDeCompra = () => {
                     </p>
                     <p className="text-white font-bold">
                       {" "}
-                      {MESSAGES.TOTAL_PAG_CARRINHO}
+                      {MESSAGES.CARRINHO_COMPRA.TOTAL_PAG_CARRINHO}
                       {(valorTotal + valorFrete).toFixed(2)}
                     </p>
                   </div>
@@ -107,7 +113,7 @@ const CarrinhoDeCompra = () => {
                   onClick={handleOpenModal}
                   className="bg-red-600 px-2 text-white font-bold round py-3 hover:bg-red-500 duration-100"
                 >
-                  {MESSAGES.FINALIZAR_COMPRA}
+                  {MESSAGES.CARRINHO_COMPRA.FINALIZAR_COMPRA}
                 </button>
               </div>
             </>
@@ -118,11 +124,11 @@ const CarrinhoDeCompra = () => {
                   <FaCartArrowDown className="text-7xl text-white transition transform animate-bounce" />
                 </div>
                 <h5 className="flex justify-center text-amber-400 mt-5">
-                  {MESSAGES.NENHUM_ITEM_CARRINHO}
+                  {MESSAGES.CARRINHO_COMPRA.NENHUM_ITEM_CARRINHO}
                 </h5>
                 <div className="w-full justify-center flex">
                   <small className="text-white text-center">
-                    {MESSAGES.VA_ATE_SESSAO_COMPRAS}
+                    {MESSAGES.CARRINHO_COMPRA.VA_ATE_SESSAO_COMPRAS}
                   </small>
                 </div>
               </div>
