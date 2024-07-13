@@ -1,13 +1,13 @@
 import React from "react";
 import { MESSAGES } from "../../utils/messages";
-import { CardProps } from "../../utils/interfaces/card-props";
-import { FaBasketShopping } from "react-icons/fa6";
 import SkeletonBones from "../skeletonBones";
+import { Comic } from "../../utils/interfaces/pages/page-home";
 
-const CardItem = ({ dataItem }: any) => {
-  const handleRedirect = (id) => {
+const CardItem = ({ dataItem }: Comic) => {
+  const handleRedirect = (id: number) => {
     window.location.href = `/comics/${id}`;
   };
+
   return (
     <>
       <div className="w-full">

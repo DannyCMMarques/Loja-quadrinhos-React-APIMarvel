@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import ContainerItem from "../container";
 import { FaUser } from "react-icons/fa6";
 import { MESSAGES } from "./../../utils/messages/index";
+import { CardBannerItemProps } from "../../utils/interfaces/pages/page-home";
 
-const CardBannerItem = ({ dataItem }: any) => {
+const CardBannerItem = ({ dataItem }: CardBannerItemProps) => {
   const [mostrarDescricaoLonga, setMostrarDescricaoLonga] = useState(false);
 
-  const description =
-    dataItem?.description === "#N/A" ? "" : dataItem?.description;
+  const description = dataItem?.description === "#N/A" ? "" : dataItem?.description;
   const descricaoLonga = description?.length > 150;
-
   const creators = dataItem?.creators?.items ?? [];
   const mostrarCreators = creators.slice(0, 5);
   const creatorsLonga = creators.length > 5;
+
+  const handleRedirect = () => {
+    window.location.href = `/comics/${dataItem?.id}`;
+  };
 
   return (
     <>
@@ -49,7 +52,10 @@ const CardBannerItem = ({ dataItem }: any) => {
                 : `${description?.slice(0, 150)}${descricaoLonga ? "..." : ""}`}
             </p>
 
-            <button className="bg-red-700 p-2 rounded-md w-auto text-white uppercase font-bold hover:bg-red-500 duration-300">
+            <button
+              onClick={handleRedirect}
+              className="bg-red-700 p-2 rounded-md w-auto text-white uppercase font-bold hover:bg-red-500 duration-300"
+            >
               {MESSAGES?.BOTAO_BANNER}
             </button>
           </ContainerItem>

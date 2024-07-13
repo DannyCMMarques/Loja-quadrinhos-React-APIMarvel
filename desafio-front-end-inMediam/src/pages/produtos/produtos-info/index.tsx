@@ -1,23 +1,19 @@
-
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import ContainerItem from "../../../components/container";
 import { UseItensCarrinhoContext } from "./../../../utils/context/useItensCarrinho";
 import useFormattedPrice from "../../../hooks/useFormatePrice";
-import useComicsService from "../../../service/comics-service";
 import SwiperComponent from "../../../components/swiper";
 import CardItem from "../../../components/cards-item";
 import { MESSAGES } from "../../../utils/messages";
 import CepComponente from "./../../../components/cep/index";
 import SkeletonBones from "../../../components/skeletonBones";
 import FaixaInfoProduto from "../../../components/faixa-info-produtos";
-import {
-  ComicsData,
-
-} from "../../../utils/interfaces/pages/produtos-info";
+import { ComicsData } from "../../../utils/interfaces/pages/produtos-info";
 import { FreteSelecionado } from "../../../utils/interfaces/components/cep-componente-interfaces";
 import PrecoPaginaInfo from "../../../components/preco-pagina-info";
 import ConteudoInfoProduto from "../../../components/conteudo-info-produto";
 import AdicionarCarrinhoComponente from "../../../components/adicionar-carrinho";
+import useProductListService from "../../../service/product-list-service";
 
 const ProdutoInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,14 +24,14 @@ const ProdutoInfo = () => {
   const [cep, setCep] = useState<string>();
   const [selectedFrete, setSelectedFrete] = useState<any>();
   const [dataCep, setDataCep] = useState<any>();
-  const comicService = useComicsService();
   const activePath = window.location.pathname;
   const id: any = activePath.split("/").pop();
+  const comicService = useProductListService();
 
   const getComicsID = useCallback(async () => {
     setIsLoading(true);
     try {
-      const comic = await comicService.getComicsID(id);
+      const comic = await comicService.getCategoriesID(id);
       setDataComics(comic?.data?.results[0]);
       setIsLoading(false);
       return comic;
@@ -48,7 +44,7 @@ const ProdutoInfo = () => {
   const getComics = useCallback(async () => {
     setIsLoading(true);
     try {
-      const comic = await comicService.getComics(20, 80);
+      const comic = await comicService.getACategoriesTodas("comics", 20, 80);
       setDataAllComics(comic.data.results);
       setIsLoading(false);
     } catch (err) {
