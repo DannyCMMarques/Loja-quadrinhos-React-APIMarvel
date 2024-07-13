@@ -5,7 +5,6 @@ const ImageCard = ({ index, dataCard }: ImageCardInterface) => {
 
   const handleRedirect = () => {
     window.location.href = `/comics/${dataCard?.data[index]?.id}`;
-    console.log("funcionou");
   };
 
   return (

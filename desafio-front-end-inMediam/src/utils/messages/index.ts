@@ -38,7 +38,13 @@ PAGE_PRODUTO_INFO:{
      FACEBOOK: "Facebook",
       INSTAGRAM: "Instagram",
 EMAIL: "Email",
-  }
+ },
+
+CEPCOMPONENTE:{
+CEP_NAO_ENCONTRADO:"Zip code not found",
+CEP_FRASE:'Enter the zip code to calculate the price and deadline'
+}
+
 
 
 

@@ -94,7 +94,6 @@ const ProductList = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
       <div className="w-full mt-24 md:mt-20 sm:mt-24">
         <div
           className="relative w-full h-72 -z-20"

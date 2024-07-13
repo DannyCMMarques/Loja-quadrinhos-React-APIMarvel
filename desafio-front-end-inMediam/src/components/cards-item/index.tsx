@@ -2,12 +2,12 @@ import React from "react";
 import { MESSAGES } from "../../utils/messages";
 import { CardProps } from "../../utils/interfaces/card-props";
 import { FaBasketShopping } from "react-icons/fa6";
+import SkeletonBones from "../skeletonBones";
 
 const CardItem = ({ dataItem }: any) => {
   const handleRedirect = (id) => {
     window.location.href = `/comics/${id}`;
   };
-
   return (
     <>
       <div className="w-full">
@@ -20,26 +20,41 @@ const CardItem = ({ dataItem }: any) => {
             backgroundPosition: "center",
           }}
         >
-          <div className="flex  h-full w-full items-center justify-center bg-neutral-700 bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity duration-300">
-            <div>
-              <p className="text-white font-bold text-3xl text-center">
-                R$
-                {dataItem?.prices[0]?.price === 0
-                  ? 5.99
-                  : dataItem?.prices[0]?.price}
-              </p>
-              <div>
-                <button
-                  onClick={() => {
-                    handleRedirect(dataItem.id);
-                  }}
-                  className="text-white uppercase text-xs font-bold  py-2 px-4 rounded border border-white mt-5 hover:border-red-800 hover:bg-red-800"
-                >
-                  {MESSAGES.BOTAO_CARD_ITEM}
-                </button>
+          {dataItem === null ? (
+            Array.from({ length: 5 }).map((_, index) => (
+              <div className="flex gap-5" key={index}>
+                <SkeletonBones
+                  height="h-14"
+                  width="w-48 md:w-60 sm:w-40"
+                  display="flex"
+                  justify="justify-between"
+                />
               </div>
-            </div>
-          </div>
+            ))
+          ) : (
+            <>
+              <div className="flex  h-full w-full items-center justify-center bg-neutral-700 bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div>
+                  <p className="text-white font-bold text-3xl text-center">
+                    R$
+                    {dataItem?.prices[0]?.price === 0
+                      ? 5.99
+                      : dataItem?.prices[0]?.price}
+                  </p>
+                  <div>
+                    <button
+                      onClick={() => {
+                        handleRedirect(dataItem.id);
+                      }}
+                      className="text-white uppercase text-xs font-bold  py-2 px-4 rounded border border-white mt-5 hover:border-red-800 hover:bg-red-800"
+                    >
+                      {MESSAGES.BOTAO_CARD_ITEM}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div>
