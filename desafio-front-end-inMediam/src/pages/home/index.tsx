@@ -110,6 +110,7 @@ const Index = () => {
       <>
         <div className="w-full mt-16 md:mt-16 sm:mt-16">
           <CardBannerItem dataItem={HQSAleatorios} />
+
           <ContainerItem>
             <div className="w-full mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_1_HOME} />
@@ -121,7 +122,8 @@ const Index = () => {
                 ))}
               </SwiperComponent>
             </div>
-            <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
+
+            <div className="w-full mt-1 md:mt-0 sm:mt-1 mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_2_HOME} />
             </div>
             <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
@@ -132,7 +134,7 @@ const Index = () => {
               </SwiperComponent>
             </div>
 
-            <div className="mt-20">
+            <div className="mt-5">
               <div className="w-full mb-5">
                 <FrasesHomeComponente frase={MESSAGES.FRASE_HOME_DESTAQUE} />
               </div>
@@ -140,10 +142,10 @@ const Index = () => {
                 <DestaqueComponente data={dataComics} />
               </div>
             </div>
-            <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
+
+            <div className="w-full mt-12 md:mt-15 sm:mt-12 mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_4_HOME} />
             </div>
-
             <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
               <SwiperComponent quantItemMobile={2} quantItems={5}>
                 {bestsSeries.map((item) => (
@@ -151,10 +153,10 @@ const Index = () => {
                 ))}
               </SwiperComponent>
             </div>
-            <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
+
+            <div className="w-full mt-12 md:mt-15 sm:mt-12 mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_3_HOME} />
             </div>
-
             <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
               <SwiperComponent quantItemMobile={2} quantItems={5}>
                 {dataBestsCreators.map((item) => (

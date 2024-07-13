@@ -16,6 +16,15 @@ function useProductListService() {
     );
   }
 
+  async function getCategoriesIDInfo(
+    menuSelect: string,
+    id?: any,
+  ) {
+    return await api.get(
+      `/${menuSelect}/${id}?ts=1&apikey=${publicKey}&hash=${md5}`
+    );
+  }
+
   async function getACategoriesTodas(
     menuSelect: string,
     limite?: number,
@@ -26,7 +35,7 @@ function useProductListService() {
     );
   }
 
-  return { getCategoriesID, getACategoriesTodas };
+  return { getCategoriesID, getACategoriesTodas, getCategoriesIDInfo };
 }
 
 export default useProductListService;
