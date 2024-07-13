@@ -69,7 +69,7 @@ const Navbar = () => {
               </nav>
 
               <div className="flex gap-3 items-baseline">
-                <a className="flex gap-2 text-lg" href="/dashboard">
+                <a className="flex gap-2 text-lg" href="/historico-de-compras">
                   <FiHeart
                     size={26}
                     className="hover:text-red-800 text-white"

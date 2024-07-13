@@ -43,12 +43,19 @@ const CarrinhoDeCompra = () => {
     setValorTotal(calcularValorTotal());
   }, [itensCarrinhos]);
 
+ const produtos=itensCarrinhos.map((carrinho)=>{ return carrinho.item})
+
+
   const handleOpenModal = () => {
+
     const dataItensFinalizar: any = {
       valorTotal: valorTotal,
-      totalItens: itensCarrinhos.item,
-    };
+      totalItens:produtos,
+   };
+
+   console.log(dataItensFinalizar);
     setDataFormFinalizarCompra(dataItensFinalizar);
+console.log(dataFormFinalizarCompra)
     setIsOpen(true);
   };
 
