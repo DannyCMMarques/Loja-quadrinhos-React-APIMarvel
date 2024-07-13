@@ -10,6 +10,7 @@ import useComicsService from "../../service/comics-service";
 import useCharactersService from "../../service/charactes-service";
 import useCreatorsService from "../../service/creators-service";
 import Loading from "../../components/loading";
+import SkeletonBones from "../../components/skeletonBones";
 
 const Index = () => {
   const comicService = useComicsService();
@@ -94,67 +95,65 @@ const Index = () => {
   return (
     <>
       {isLoading && <Loading />}
-      {dataComics.length > 0 && (
-        <>
-          <div className="w-full mt-16 md:mt-16 sm:mt-16">
-            <CardBannerItem dataItem={HQSAleatorios} />
-            <ContainerItem>
+      <>
+        <div className="w-full mt-16 md:mt-16 sm:mt-16">
+          <CardBannerItem dataItem={HQSAleatorios} />
+          <ContainerItem>
+            <div className="w-full mb-5">
+              <FrasesHomeComponente frase={MESSAGES.FRASE_1_HOME} />
+            </div>
+            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+              <SwiperComponent quantItemMobile={2} quantItems={5}>
+                {dataComics.map((item) => (
+                  <CardItem key={item.id} dataItem={item ? item : null} />
+                ))}
+              </SwiperComponent>
+            </div>
+            <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
+              <FrasesHomeComponente frase={MESSAGES.FRASE_2_HOME} />
+            </div>
+            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+              <SwiperComponent quantItemMobile={2} quantItems={5}>
+                {dataBestsCharacters.map((item) => (
+                  <CardItem key={item.id} dataItem={item} />
+                ))}
+              </SwiperComponent>
+            </div>
+
+            <div className="mt-20">
               <div className="w-full mb-5">
-                <FrasesHomeComponente frase={MESSAGES.FRASE_1_HOME} />
+                <FrasesHomeComponente frase={MESSAGES.FRASE_HOME_DESTAQUE} />
               </div>
-              <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-                <SwiperComponent quantItemMobile={2} quantItems={5}>
-                  {dataComics.map((item) => (
-                    <CardItem key={item.id} dataItem={item} />
-                  ))}
-                </SwiperComponent>
+              <div className="w-full h-[33rem] ">
+                <DestaqueComponente data={dataComics} />
               </div>
-              <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
-                <FrasesHomeComponente frase={MESSAGES.FRASE_2_HOME} />
-              </div>
-              <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-                <SwiperComponent quantItemMobile={2} quantItems={5}>
-                  {dataBestsCharacters.map((item) => (
-                    <CardItem key={item.id} dataItem={item} />
-                  ))}
-                </SwiperComponent>
-              </div>
+            </div>
 
-              <div className="mt-20">
-                <div className="w-full mb-5">
-                  <FrasesHomeComponente frase={MESSAGES.FRASE_HOME_DESTAQUE} />
-                </div>
-                <div className="w-full h-[33rem] ">
-                  <DestaqueComponente data={dataComics} />
-                </div>
-              </div>
+            <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
+              <FrasesHomeComponente frase={MESSAGES.FRASE_3_HOME} />
+            </div>
 
-              <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
-                <FrasesHomeComponente frase={MESSAGES.FRASE_3_HOME} />
-              </div>
+            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+              <SwiperComponent quantItemMobile={2} quantItems={5}>
+                {dataBestsCreators.map((item) => (
+                  <CardItem key={item.id} dataItem={item} />
+                ))}
+              </SwiperComponent>
+            </div>
+            <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
+              <FrasesHomeComponente frase={MESSAGES.FRASE_4_HOME} />
+            </div>
 
-              <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-                <SwiperComponent quantItemMobile={2} quantItems={5}>
-                  {dataBestsCreators.map((item) => (
-                    <CardItem key={item.id} dataItem={item} />
-                  ))}
-                </SwiperComponent>
-              </div>
-              <div className="w-full mt-12 md:mt-20 sm:mt-12 mb-5">
-                <FrasesHomeComponente frase={MESSAGES.FRASE_4_HOME} />
-              </div>
-
-              <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-                <SwiperComponent quantItemMobile={2} quantItems={5}>
-                  {dataAncientOne.map((item) => (
-                    <CardItem key={item.id} dataItem={item} />
-                  ))}
-                </SwiperComponent>
-              </div>
-            </ContainerItem>
-          </div>
-        </>
-      )}
+            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+              <SwiperComponent quantItemMobile={2} quantItems={5}>
+                {dataAncientOne.map((item) => (
+                  <CardItem key={item.id} dataItem={item} />
+                ))}
+              </SwiperComponent>
+            </div>
+          </ContainerItem>
+        </div>
+      </>
     </>
   );
 };
