@@ -2,16 +2,15 @@ import React from 'react';
 import { FaInfoCircle } from 'react-icons/fa';
 import { HistoricoDetalhamentoProps } from '../../utils/interfaces/pages/historico-compras';
 
-const HistoricoDetalhamento: React.FC<HistoricoDetalhamentoProps> = ({ dados }) => {
+const HistoricoDetalhamento = ({ dados }: HistoricoDetalhamentoProps) => {
   const handleNumber = (n: any) => {
     return parseFloat(n).toFixed(2);
   };
 
   const item = dados?.item;
-  const dadosCompra = item?.dadosCompra;
-  const dadosPessoais = item?.dadosPessoais;
-  const totalItens = dadosCompra?.totalItens;
-  const thumbnail = totalItens?.[0]?.thumbnail;
+  const dadosCompra: any = item?.dadosCompra;
+  const dadosPessoais: any = item?.dadosPessoais;
+  const totalItens: any = dadosCompra?.totalItens;
 
   return (
     <div className="w-full max-h-[38rem] px-3">

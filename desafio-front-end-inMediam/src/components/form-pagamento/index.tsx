@@ -7,18 +7,15 @@ import { UseItensCarrinhoContext } from "../../utils/context/useItensCarrinho";
 
 const FormComponent = ({ dataItensCarrinho, onClose }) => {
 
-  console.log(dataItensCarrinho);
-
   const { removerTodosItens } = useContext(UseItensCarrinhoContext);
 
-  const { itensHistorico, adicionarItemhistorico } = useContext(
+  const { adicionarItemhistorico } = useContext(
     UseItensHistoricoContext
   );
   const [sessao, setSessao] = useState(0);
   const [formSection1, setFormSection1] = useState({});
   const [avancar, setAvancar] = useState(false);
   const [formSection2, setFormSection2] = useState({});
-  const [formularioCompra, setFormularioCompra] = useState([]);
   const [confirmado, setConfirmado] = useState(false);
 
   const dataCompra  = new Date().toLocaleDateString('pt-BR', {
@@ -26,7 +23,7 @@ const FormComponent = ({ dataItensCarrinho, onClose }) => {
     month: '2-digit',
     day: '2-digit'
   });
-console.log(dataCompra);
+
   const handleProximaSessao = (data: any) => {
     setFormSection1(data);
     if (data) {

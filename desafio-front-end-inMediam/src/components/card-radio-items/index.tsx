@@ -1,16 +1,10 @@
 import React from "react";
-import { CardProps } from "../../utils/interfaces/card-props";
 import SwiperComponent from "../swiper";
 import SkeletonBones from "../skeletonBones";
-interface CardRadioItemProps {
-  dataItem: Array<CardProps>;
-  categorias: string;
-}
+import { DataItemInterface } from "../../utils/interfaces/dataItem-interface";
+import { CardRadioItemProps } from "../../utils/interfaces/components/card-radio-items-interface";
 
-const CardRadioItem: React.FC<CardRadioItemProps> = ({
-  dataItem,
-  categorias,
-}) => {
+const CardRadioItem = ({ dataItem, categorias }: CardRadioItemProps) => {
   const handleRedirect = (id: any) => {
     window.location.href = `/${categorias}/${id}`;
   };
@@ -36,7 +30,7 @@ const CardRadioItem: React.FC<CardRadioItemProps> = ({
           </div>
         )}
         <div className="flex justify-between w-full">
-          {dataItem.map((item: CardProps) => (
+          {dataItem.map((item: DataItemInterface) => (
             <div
               key={item?.id}
               className="w-full"

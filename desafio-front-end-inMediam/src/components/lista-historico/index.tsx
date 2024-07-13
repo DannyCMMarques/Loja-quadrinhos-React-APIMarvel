@@ -1,8 +1,8 @@
-import React from 'react';
-import { TiInfo } from 'react-icons/ti';
-import { ListaHistoricoProps } from '../../utils/interfaces/pages/historico-compras';
+import React from "react";
+import { TiInfo } from "react-icons/ti";
+import { ListaHistoricoProps } from "../../utils/interfaces/pages/historico-compras";
 
-const ListaHistorico: React.FC<ListaHistoricoProps> = ({ dados, OpenModal }) => {
+const ListaHistorico = ({ dados, OpenModal }: ListaHistoricoProps) => {
   const item = dados?.item;
   const dadosCompra = item?.dadosCompra;
   const dadosPessoais = item?.dadosPessoais;
@@ -21,31 +21,31 @@ const ListaHistorico: React.FC<ListaHistoricoProps> = ({ dados, OpenModal }) => 
           style={{
             backgroundImage: thumbnail
               ? `url(${thumbnail?.path}.${thumbnail?.extension})`
-              : 'none',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+              : "none",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         ></div>
 
         <div className="flex flex-col items-start w-2/3 justify-center">
           <h5 className="font-bold text-sm text-center text-white">Nome:</h5>
           <span className="font-medium text-center text-white">
-            {dadosPessoais?.firstname || 'Desconhecido'}
+            {dadosPessoais?.firstname || "Desconhecido"}
           </span>
         </div>
 
         <div className="flex flex-col items-start w-2/3 justify-center">
           <h5 className="font-bold text-center text-sm">Preço:</h5>
           <span className="font-medium text-center">
-            {dadosCompra ? handleNumber(dadosCompra.valorTotal) : 'N/A'}
+            {dadosCompra ? handleNumber(dadosCompra.valorTotal) : "N/A"}
           </span>
         </div>
 
         <div className="flex flex-col items-start w-2/3 justify-center">
           <h5 className="font-bold text-sm text-center">Data:</h5>
           <span className="font-medium text-center">
-            {item?.dataCompra || 'N/A'}
+            {item?.dataCompra || "N/A"}
           </span>
         </div>
 

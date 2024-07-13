@@ -3,7 +3,7 @@ import { MESSAGES } from "../../utils/messages";
 import SkeletonBones from "../skeletonBones";
 import { Comic } from "../../utils/interfaces/pages/page-home";
 
-const CardItem = ({ dataItem }: any) => {
+const CardItem = ({ dataItem }: Comic) => {
   const handleRedirect = (id: number) => {
     window.location.href = `/comics/${id}`;
   };

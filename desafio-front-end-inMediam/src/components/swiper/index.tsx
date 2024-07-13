@@ -6,7 +6,6 @@ const SwiperComponent = ({
   quantItemMobile = 2,
   quantItems = 5,
 }: SwiperProps) => {
-
   const [slideAtual, setSlideAtual] = useState<number>(0);
   const [itensPorPagina, setItensPorPagina] = useState<number>(5);
   const slideRef = useRef(null);

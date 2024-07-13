@@ -225,7 +225,7 @@ const ProdutoInfo = () => {
         </>
       ) : (
         <>
-          <FaixaInfoProduto data={dataComics} />
+          <FaixaInfoProduto dataItem={dataComics} />
         </>
       )}
 

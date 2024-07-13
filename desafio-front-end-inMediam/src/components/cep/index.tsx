@@ -150,7 +150,7 @@ const CepComponente = ({
 
         {opcoesFrete.length > 0 && !verificacaoErro && (
           <div className="mt-4">
-            {opcoesFrete.map((frete, index) => (
+            {opcoesFrete.map((frete: any, index: number) => (
               <div
                 key={index}
                 className="flex items-center justify-between border p-2 rounded-md mt-2 cursor-pointer"
