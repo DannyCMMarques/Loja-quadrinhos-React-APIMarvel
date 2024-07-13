@@ -1,4 +1,4 @@
-interface ImageCardInterface {
+ export interface ImageCardInterface {
   index: number;
   dataCard: {
     data: {
