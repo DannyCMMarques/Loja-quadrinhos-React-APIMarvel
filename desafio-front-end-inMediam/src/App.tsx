@@ -8,6 +8,7 @@ import ProdutoInfo from "./pages/produtos/produtos-info";
 import CarrinhoDeCompra from "./pages/carrinho-de-compra";
 import { itensCarrinhosCompra } from "./utils/mocks/itens-carrinho-compra";
 import { itensHistorico } from "./utils/mocks/itens-historico";
+import HistoricoCompras from "./pages/historico-de-compras";
 function App() {
   if (!localStorage.getItem("itensCompra")) {
     const itensCarrinhosCompraString = JSON.stringify(itensCarrinhosCompra);
@@ -32,6 +33,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/comics/:id" element={<ProdutoInfo />} />
           <Route path="/carrinho-de-compra" element={<CarrinhoDeCompra />} />
+          <Route path="/historico-de-compras" element={<HistoricoCompras />} />
         </Routes>
       </BrowserRouter>
     </>

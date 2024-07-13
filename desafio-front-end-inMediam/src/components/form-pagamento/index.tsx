@@ -6,6 +6,9 @@ import CompraAprovada from "../compra-aprovada/compra-aprovada";
 import { UseItensCarrinhoContext } from "../../utils/context/useItensCarrinho";
 
 const FormComponent = ({ dataItensCarrinho, onClose }) => {
+
+  console.log(dataItensCarrinho);
+
   const { removerTodosItens } = useContext(UseItensCarrinhoContext);
 
   const { itensHistorico, adicionarItemhistorico } = useContext(
@@ -18,6 +21,12 @@ const FormComponent = ({ dataItensCarrinho, onClose }) => {
   const [formularioCompra, setFormularioCompra] = useState([]);
   const [confirmado, setConfirmado] = useState(false);
 
+  const dataCompra  = new Date().toLocaleDateString('pt-BR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+console.log(dataCompra);
   const handleProximaSessao = (data: any) => {
     setFormSection1(data);
     if (data) {
@@ -42,6 +51,8 @@ const FormComponent = ({ dataItensCarrinho, onClose }) => {
       dadosCartao: data.data,
       dadosPessoais: data.dataFinal,
       dadosCompra: dataItensCarrinho,
+      dataCompra: dataCompra,
+
     };
 
     if (finalItem) {

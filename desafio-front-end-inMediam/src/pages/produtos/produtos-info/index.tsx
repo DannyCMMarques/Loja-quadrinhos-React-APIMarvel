@@ -16,7 +16,6 @@ import AdicionarCarrinhoComponente from "../../../components/adicionar-carrinho"
 import useProductListService from "../../../service/product-list-service";
 
 const ProdutoInfo = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { adicionarItemCarrinho } = useContext(UseItensCarrinhoContext);
   const [dataAllComics, setDataAllComics] = useState<ComicsData[]>([]);
   const [dataComics, setDataComics] = useState<ComicsData>();
@@ -29,26 +28,21 @@ const ProdutoInfo = () => {
   const comicService = useProductListService();
 
   const getComicsID = useCallback(async () => {
-    setIsLoading(true);
     try {
-      const comic = await comicService.getCategoriesID(id);
+      const comic = await comicService.getCategoriesIDInfo("comics", id);
       setDataComics(comic?.data?.results[0]);
-      setIsLoading(false);
+
       return comic;
     } catch (err) {
-      setIsLoading(false);
       console.error("Erro ao buscar quadrinhos:", err);
     }
   }, [comicService, id]);
 
   const getComics = useCallback(async () => {
-    setIsLoading(true);
     try {
       const comic = await comicService.getACategoriesTodas("comics", 20, 80);
       setDataAllComics(comic.data.results);
-      setIsLoading(false);
     } catch (err) {
-      setIsLoading(false);
       console.error("Erro ao buscar quadrinhos:", err);
     }
   }, [comicService]);

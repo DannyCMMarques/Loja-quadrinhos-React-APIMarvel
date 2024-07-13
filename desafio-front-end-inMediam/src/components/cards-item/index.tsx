@@ -3,7 +3,7 @@ import { MESSAGES } from "../../utils/messages";
 import SkeletonBones from "../skeletonBones";
 import { Comic } from "../../utils/interfaces/pages/page-home";
 
-const CardItem = ({ dataItem }: Comic) => {
+const CardItem = ({ dataItem }: any) => {
   const handleRedirect = (id: number) => {
     window.location.href = `/comics/${id}`;
   };
@@ -44,7 +44,7 @@ const CardItem = ({ dataItem }: Comic) => {
                   <div>
                     <button
                       onClick={() => {
-                        handleRedirect(dataItem.id);
+                        handleRedirect(dataItem?.id);
                       }}
                       className="text-white uppercase text-xs font-bold  py-2 px-4 rounded border border-white mt-5 hover:border-red-800 hover:bg-red-800"
                     >
