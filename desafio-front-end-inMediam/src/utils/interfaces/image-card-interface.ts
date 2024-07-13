@@ -1,6 +1,13 @@
-export interface ImageCardInterface {
-  imageUrl: string;
-  width: string;
-  height:string;
-  cursor: string
+interface ImageCardInterface {
+  index: number;
+  dataCard: {
+    data: {
+      [key: number]: {
+        thumbnail: {
+          path: string;
+          extension: string;
+        };
+      };
+    };
+  };
 }

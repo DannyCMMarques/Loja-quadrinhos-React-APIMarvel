@@ -1,48 +1,16 @@
 import React from "react";
-import { DestaqueMock } from "../../utils/mocks/destaquesMocks";
-import ImageCard from "../image-card";
-
-const DestaqueComponente = () => {
-  const mock = DestaqueMock;
-
+import ImageCard from "./../image-card/index";
+const DestaqueComponente = (data) => {
   return (
-    <div className="w-full">
-      <div className="flex gap-x-5 w-96 h-96">
-        <ImageCard
-          imageUrl={mock[4]?.imagemCartoon}
-          width="[85rem]"
-          height="[45rem]"
-          cursor="pointer"
-        />
-        <div className="w-full">
-          <div className="flex w-full gap-x-5 mb-5">
-            <ImageCard
-              imageUrl={mock[1]?.imagemCartoon}
-              width="72"
-              height="[21.875rem]"
-              cursor="pointer"
-            />
-            <ImageCard
-              imageUrl={mock[2]?.imagemCartoon}
-              width="72"
-              height="[21.875rem]"
-              cursor="pointer"
-            />
-          </div>
-          <div className="flex w-full gap-x-5">
-            <ImageCard
-              imageUrl={mock[3]?.imagemCartoon}
-              width="72"
-              height="[21.875rem]"
-              cursor="pointer"
-            />
-            <ImageCard
-              imageUrl={mock[4]?.imagemCartoon}
-              width="72"
-              height="[21.875rem]"
-              cursor="pointer"
-            />
-          </div>
+    <div className="w-full h-full ">
+      <div className="bg-black px-2 py-2 flex sm:flex  md:grid md:grid-cols-2 gap-4 w-full h-full">
+        <ImageCard index={1} dataCard={data} />
+
+        <div className="w-full h-full hidden sm:hidden md:grid md:grid-cols-2 gap-4">
+          <ImageCard index={18} dataCard={data} />
+          <ImageCard index={19} dataCard={data} />
+          <ImageCard index={4} dataCard={data} />
+          <ImageCard index={5} dataCard={data} />
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ const SwiperComponent = ({
 
   const [slideAtual, setSlideAtual] = useState<number>(0);
   const [itensPorPagina, setItensPorPagina] = useState<number>(5);
-  const slideRef = useRef<HTMLDivElement>(null);
+  const slideRef = useRef(null);
   const posicaoInicialX = useRef<number | null>(null);
 
   useEffect(() => {

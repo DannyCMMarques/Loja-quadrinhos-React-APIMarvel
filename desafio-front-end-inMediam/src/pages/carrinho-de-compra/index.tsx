@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import ContainerItem from "../../components/container";
 import ItemCarrinho from "../../components/item-carrinho-compra";
@@ -12,12 +13,24 @@ const CarrinhoDeCompra = () => {
   const [valorTotal, setValorTotal] = useState(0);
   const [dataFormFinalizarCompra, setDataFormFinalizarCompra] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [valorFrete, setValorFrete] =useState(0);
 
   const handleValorAtualizado = (valor: any) => {
     setValorTotal(valorTotal + valor);
   };
 
+  const handleValorCep = () => {
+    const frete = JSON.parse(localStorage.getItem("frete"));
+    if (frete && frete?.frete?.valor) {
+      const valorFreteString = frete?.frete?.valor.replace("$", "").trim();
+      const valorFreteNumero = parseInt(valorFreteString);
+      setValorFrete(valorFreteNumero);
+    } else {
+    }
+  };
+
   useEffect(() => {
+    handleValorCep();
     const calcularValorTotal = () => {
       let total = 0;
       itensCarrinhos.forEach((item) => {
@@ -56,6 +69,7 @@ const CarrinhoDeCompra = () => {
           {itensCarrinhos.length > 0 ? (
             <>
               <h5 className="font-bold items-center text-white mb-2 text-xl">
+
                 {MESSAGES.TITULO_PAG_CARRINHO}
               </h5>
               {itensCarrinhos.map((item) => (
@@ -77,8 +91,12 @@ const CarrinhoDeCompra = () => {
                   <div>
                     <p className="text-white font-bold">
                       {" "}
+                      Frete: $ {valorFrete.toFixed(2)}
+                    </p>
+                    <p className="text-white font-bold">
+                      {" "}
                       {MESSAGES.TOTAL_PAG_CARRINHO}
-                      {(valorTotal + 20).toFixed(2)}
+                      {(valorTotal + valorFrete).toFixed(2)}
                     </p>
                   </div>
                 </div>

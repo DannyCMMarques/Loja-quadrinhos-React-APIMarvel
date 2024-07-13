@@ -35,7 +35,6 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
   };
 
   const handleProsseguir = (data: any) => {
-    console.log("pagina 1", data);
     handleProximo(data);
   };
   return (
