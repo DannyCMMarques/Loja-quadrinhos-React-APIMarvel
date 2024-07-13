@@ -1,5 +1,5 @@
 import React from "react";
-
+import ImageCardInterface from './../../utils/interfaces/image-card-interface'
 const ImageCard = ({ index, dataCard }: ImageCardInterface) => {
   const imageUrl = `${dataCard?.data[index]?.thumbnail.path}.${dataCard?.data[index]?.thumbnail.extension}`;
 

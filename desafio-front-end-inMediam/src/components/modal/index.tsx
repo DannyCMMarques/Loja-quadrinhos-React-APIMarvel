@@ -1,38 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { IoMdClose } from "react-icons/io";
+import { ModalProps } from "../../utils/interfaces/pages/carrinho-compra";
 
-const Modal = ({ isOpen, children, size, titulo, onClose }) => {
+const Modal = ({ isOpen, children }:ModalProps) => {
   const [modalOpen, setModalOpen] = useState(isOpen);
 
   useEffect(() => {
     setModalOpen(isOpen);
   }, [isOpen]);
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    if (onClose) {
-      onClose();
-    }
-  };
+  // const handleCloseModal = () => {
+  //   setModalOpen(false);
+  //   if (onClose) {
+  //     onClose();
+  //   }
+  // };
 
-  let contentClass;
-  switch (size) {
-    case "small":
-      contentClass =
-        "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[600px] max-h-[42rem] overflow-auto p-4 rounded-md";
-      break;
-    case "medium":
-      contentClass =
-        "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[900px] p-6 rounded-md";
-      break;
-    case "large":
-      contentClass =
-        "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[70%] p-6 rounded-md";
-      break;
-    default:
-      contentClass =
-        "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[70%] p-6 rounded-md";
-  }
+  // let contentClass;
+  // switch (size) {
+  //   case "small":
+  //     contentClass =
+  //       "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[600px] max-h-[42rem] overflow-auto p-4 rounded-md";
+  //     break;
+  //   case "medium":
+  //     contentClass =
+  //       "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[900px] p-6 rounded-md";
+  //     break;
+  //   case "large":
+  //     contentClass =
+  //       "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[70%] p-6 rounded-md";
+  //     break;
+  //   default:
+  //     contentClass =
+  //       "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[70%] p-6 rounded-md";
+  // }
 
   return (
     <div
@@ -40,14 +40,7 @@ const Modal = ({ isOpen, children, size, titulo, onClose }) => {
         modalOpen ? "block" : "hidden"
       }`}
     >
-      <div className={contentClass}>
-        <div className="mb-3 flex justify-between">
-          <p className="font-sans text-xl font-medium">{titulo}</p>
-          <IoMdClose
-            className="text-2xl cursor-pointer"
-            onClick={handleCloseModal}
-          />
-        </div>
+      <div className="bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[600px] max-h-[42rem] overflow-auto p-4 rounded-md">
         {children}
       </div>
     </div>
