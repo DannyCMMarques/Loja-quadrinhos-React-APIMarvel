@@ -1,13 +1,14 @@
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { ContainerItemProps } from "../interfaces/container-items-props";
+import { UseItensCarrinhoContextType } from "../interfaces/pages/carrinho-compra";
 
 export const UseItensCarrinhoContext = createContext<
   UseItensCarrinhoContextType | undefined
 >(undefined);
 
-export const UseItensCarrinhoProvider: React.FC<ContainerItemProps> = ({
+export const UseItensCarrinhoProvider = ({
   children,
-}) => {
+}: ContainerItemProps) => {
   const [itensCarrinhos, setItensCarrinho] = useState(() => {
     const itensString = localStorage.getItem("itensCompra");
     return itensString ? JSON.parse(itensString) : [];

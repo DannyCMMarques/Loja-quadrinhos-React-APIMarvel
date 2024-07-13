@@ -1,3 +1,4 @@
+import React from 'react';
 import { ContainerItemProps } from "../../utils/interfaces/container-items-props";
 
 const ContainerItem = ({ children }: ContainerItemProps) => {

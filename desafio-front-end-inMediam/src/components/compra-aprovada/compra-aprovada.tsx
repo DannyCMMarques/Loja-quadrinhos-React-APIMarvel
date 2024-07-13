@@ -14,7 +14,7 @@ const CompraAprovada = () => {
             </div>
           </div>
           <span className="text-green-400 text-xl">
-            {MESSAGES.COMPRA_APROVADA}
+            {MESSAGES.CARRINHO_COMPRA.COMPRA_APROVADA}
           </span>
         </div>
       </div>

@@ -20,7 +20,9 @@ export const MESSAGES = {
     CRIADOR: "Creator",
     VEJA_MAIS_OPCOES: "See more comic options",
   },
+
   TITULO_PAG_PRODUTO_LISTA: "Choose the best",
+
   FOOTER: {
     ATENDIMENTO: "Customer Service",
     TELEFONE: "Phone: (31) 9 9999-9999",
@@ -38,15 +40,16 @@ export const MESSAGES = {
     CEP_NAO_ENCONTRADO: "Zip code not found",
     CEP_FRASE: "Enter the zip code to calculate the price and deadline",
   },
- CARRINHO_COMPRA:{
-  COMPRA_APROVADA: "Yay, purchase approved!",
-  TITULO_PAG_CARRINHO: "My Cart",
-  TOTAL_PAG_CARRINHO: "Total: $",
-  FINALIZAR_COMPRA: "Checkout",
-  NENHUM_ITEM_CARRINHO: "No items in your shopping cart",
-  VA_ATE_SESSAO_COMPRAS: "Go to a section and make your purchases",
-  PAGINA_NAO_ENCONTRADA: "Oops! Page not found",
-  PRODUTO:"Product",
-  PRECO:"Price",
- }
+
+  CARRINHO_COMPRA: {
+    COMPRA_APROVADA: "Yay, purchase approved!",
+    TITULO_PAG_CARRINHO: "My Cart",
+    TOTAL_PAG_CARRINHO: "Total: $",
+    FINALIZAR_COMPRA: "Checkout",
+    NENHUM_ITEM_CARRINHO: "No items in your shopping cart",
+    VA_ATE_SESSAO_COMPRAS: "Go to a section and make your purchases",
+    PAGINA_NAO_ENCONTRADA: "Oops! Page not found",
+    PRODUTO: "Product",
+    PRECO: "Price",
+  },
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import ImageCard from "./../image-card/index";
-const DestaqueComponente = (data) => {
+import { DataItemInterface } from "../../utils/interfaces/dataItem-interface";
+const DestaqueComponente = (data: DataItemInterface) => {
   return (
     <div className="w-full h-full ">
       <div className="bg-black px-2 py-2 flex sm:flex  md:grid md:grid-cols-2 gap-4 w-full h-full">

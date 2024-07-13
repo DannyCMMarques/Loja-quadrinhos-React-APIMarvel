@@ -25,7 +25,7 @@ const Paginacao = ({
     let paginaInicial = Math.max(1, pagina - 2);
     let paginaFinal = Math.min(numeroTotalDePagina, paginaInicial + maximoDePaginas - 1);
 
-    const paginasArray = [];
+    const paginasArray: any = [];
     for (let i = paginaInicial; i <= paginaFinal; i++) {
       paginasArray.push(i);
     }

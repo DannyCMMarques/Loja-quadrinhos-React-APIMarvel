@@ -10,7 +10,7 @@ import { DataItensFinalizarCompra, ItemCarrinhoProps } from "../../utils/interfa
 
 const CarrinhoDeCompra = () => {
 
-  const { itensCarrinhos } = useContext(UseItensCarrinhoContext) as { itensCarrinhos: ItemCarrinhoProps[] };
+  const { itensCarrinhos } = useContext(UseItensCarrinhoContext);
 
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [dataFormFinalizarCompra, setDataFormFinalizarCompra] = useState<DataItensFinalizarCompra | null>(null);
