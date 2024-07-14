@@ -89,11 +89,18 @@ const ProdutoInfo = () => {
       },
     };
 
-    const frete: FreteSelecionado = {
-      frete: selectedFrete,
-      cep: cep,
-      dados: dataCep,
-    };
+    const existingFrete = localStorage.getItem("frete");
+    let frete: FreteSelecionado;
+
+    if (existingFrete) {
+      frete = JSON.parse(existingFrete);
+    } else {
+      frete = {
+        frete: selectedFrete,
+        cep: cep,
+        dados: dataCep,
+      };
+    }
 
     localStorage.setItem("frete", JSON.stringify(frete));
 

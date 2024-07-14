@@ -31,9 +31,11 @@ const CepComponente = ({
 
   useEffect(() => {
     const freteArmazenado = JSON.parse(localStorage.getItem("frete") || "null");
-    if (freteArmazenado) {
+    if (freteArmazenado && Object.keys(freteArmazenado).length > 0) {
       setFreteSelecionado(freteArmazenado);
       setTemFrete(true);
+    } else {
+      setTemFrete(false);
     }
   }, []);
 
@@ -88,7 +90,6 @@ const CepComponente = ({
 
   return (
     <>
-      {isLoading && <Loading />}
       <div className="border-2 py-4 px-4 mt-8">
         {!temFrete && (
           <>

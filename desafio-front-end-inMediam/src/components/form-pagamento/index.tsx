@@ -54,10 +54,10 @@ const FormComponent = ({ dataItensCarrinho, onClose }) => {
 
     if (finalItem) {
       adicionarItemhistorico(finalItem);
-      removerTodosItens();
       setConfirmado(true);
     }
     setTimeout(() => {
+      removerTodosItens();
       handleOnClose();
     }, 3000);
   };

@@ -20,6 +20,8 @@ export interface DataItensFinalizarCompra {
 export interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
+  onClose:any;
+  size: any;
 }
 export interface ItemThumbnail {
   path: string;
