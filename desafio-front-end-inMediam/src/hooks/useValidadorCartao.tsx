@@ -11,7 +11,7 @@ const useValidadorCartao = (cardNumber: string): TiposCartao | null => {
   const [tiposCartao, setTiposCartao] = useState<TiposCartao | null>(null);
 
   useEffect(() => {
-    const sanitizedCardNumber = cardNumber?.replace(/\s/g, "");
+    const limparCartao = cardNumber?.replace(/\s/g, "");
 
     const cardRegex: { [key in TiposCartao]: RegExp } = {
       Visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
@@ -21,15 +21,15 @@ const useValidadorCartao = (cardNumber: string): TiposCartao | null => {
       Other: /^(?:2131|1800|35\d{3})\d{11}$/,
     };
 
-    let foundType: TiposCartao | null = null;
+    let tipoEncontrado: TiposCartao | null = null;
 
     Object.entries(cardRegex).forEach(([type, regex]) => {
-      if (regex.test(sanitizedCardNumber)) {
-        foundType = type as TiposCartao;
+      if (regex.test(limparCartao)) {
+        tipoEncontrado = type as TiposCartao;
       }
     });
 
-    setTiposCartao(foundType);
+    setTiposCartao(tipoEncontrado);
   }, [cardNumber]);
 
   return tiposCartao;
