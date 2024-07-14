@@ -66,7 +66,7 @@ console.log(dataFormFinalizarCompra)
 
   return (
     <>
-      <Modal isOpen={isOpen}>
+      <Modal onClose={handleCloseModal} isOpen={isOpen} size="small">
         {dataFormFinalizarCompra && (
           <FormComponent
             dataItensCarrinho={dataFormFinalizarCompra}

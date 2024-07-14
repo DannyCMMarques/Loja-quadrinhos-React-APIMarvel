@@ -13,14 +13,14 @@ const FormDataCartao = ({
   dataFinal,
   dataCarrinho,
 }) => {
-  const [formattedCardNumber, setFormattedCardNumber] = useState("");
-  const [payamentApproval, setPayamentApproval] = useState(false);
+  const [numeroCartaoFormatado, setNumeroCartaoFormatado] = useState("");
+  const [pagamentoAprovado, setPagamentoAprovado] = useState(false);
 
   const validationSchemaCartao = z.object({
     numeroCartao: z
       .string()
       .min(2, { message: "This field is required" })
-      .refine((value) => isValidCreditCard(value), {
+      .refine((value) => isValid(value), {
         message: "Invalid credit card number",
       }),
     nomeImpresso: z.string().min(2, { message: "This field is required" }),
@@ -30,7 +30,7 @@ const FormDataCartao = ({
     parcela: z.string(),
   });
 
-  const isValidCreditCard = (value: string) => {
+  const isValid = (value: string) => {
     const cardNumber = value?.replace(/\s/g, "");
     return /^\d{16}$/.test(cardNumber);
   };
@@ -45,7 +45,6 @@ const FormDataCartao = ({
   });
 
   const onSubmit: SubmitHandler<InputsFormDadosCartao> = (dataForm) => {
-
     if (dataForm) handleProsseguir(dataForm);
   };
 
@@ -54,7 +53,7 @@ const FormDataCartao = ({
       dataFinal,
       data,
     };
-    setPayamentApproval(true);
+    setPagamentoAprovado(true);
     handleFinal(finaldata);
   };
 
@@ -62,26 +61,26 @@ const FormDataCartao = ({
     handleVoltar(data);
   };
 
-  const cardType = useValidadorCartao(watch("numeroCartao"));
+  const mascaraCartao = useValidadorCartao(watch("numeroCartao"));
 
   const formatCardNumber = (value: string) => {
-    const numericValue = value?.replace(/\D/g, "");
-    let formattedValue = "";
-    for (let i = 0; i < numericValue.length; i++) {
+
+    const valorNumerico = value?.replace(/\D/g, "");
+
+    let valorFormatado = "";
+    for (let i = 0; i < valorNumerico.length; i++) {
       if (i > 0 && i % 4 === 0) {
-        formattedValue += " ";
+        valorFormatado += " ";
       }
-      formattedValue += numericValue[i];
+      valorFormatado += valorNumerico[i];
     }
-    return formattedValue;
+    return valorFormatado;
   };
 
-  const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const formattedValue = formatCardNumber(value);
-    setFormattedCardNumber(formattedValue);
+    const valorFormatado = formatCardNumber(value);
+    setNumeroCartaoFormatado(valorFormatado);
   };
 
   return (
@@ -108,7 +107,7 @@ const FormDataCartao = ({
               type="text"
               id="numeroCartao"
               {...register("numeroCartao")}
-              value={formattedCardNumber}
+              value={numeroCartaoFormatado}
               onChange={handleCardNumberChange}
               className="block w-full rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-1  focus:ring-gray-500 sm:text-sm sm:leading-6"
               placeholder="Insira o número do cartão"
@@ -120,9 +119,9 @@ const FormDataCartao = ({
               </p>
             )}
 
-            {cardType && (
+            {mascaraCartao && (
               <p className="text-gray-500 text-start text-sm">
-                Card Type: {cardType}
+                Card Type: {mascaraCartao}
               </p>
             )}
           </div>
@@ -242,7 +241,7 @@ const FormDataCartao = ({
           </div>
           <div className="flex justify-between gap-4 w-full mt-5">
             <button
-              disabled={payamentApproval}
+              disabled={pagamentoAprovado}
               className="bg-black w-full text-white font-bold rounded-sm px-2 py-2 hover:opacity-90 duration-100"
               onClick={handleAnterior}
               type="button"
@@ -250,11 +249,11 @@ const FormDataCartao = ({
               Return
             </button>
             <button
-              disabled={payamentApproval}
+              disabled={pagamentoAprovado}
               className="bg-red-600 w-full text-white font-bold rounded-sm px-2 py-2 hover:bg-red-500 duration-100"
               type="submit"
             >
-              {payamentApproval ? "Loading..." : "Finish"}
+              {pagamentoAprovado ? "Loading..." : "Finish"}
             </button>
           </div>
         </form>

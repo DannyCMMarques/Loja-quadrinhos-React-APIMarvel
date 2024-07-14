@@ -6,12 +6,14 @@ import { MESSAGES } from "../../utils/messages";
 import HistoricoDetalhamento from "../../components/historico-detalhes";
 import ListaHistorico from "../../components/lista-historico";
 import { ItemHistorico } from "../../utils/interfaces/pages/historico-compras";
- import { UseItensHistoricoContext } from "../../utils/context/useItensHistórico";
+import { UseItensHistoricoContext } from "../../utils/context/useItensHistórico";
 
-const HistoricoCompras= () => {
+const HistoricoCompras = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { itensHistorico }: { itensHistorico: ItemHistorico[] } = useContext(UseItensHistoricoContext);
+  const { itensHistorico }: { itensHistorico: ItemHistorico[] } = useContext(
+    UseItensHistoricoContext
+  );
 
   const handleCloseModal = () => {
     setIsOpen(false);
@@ -30,6 +32,7 @@ const HistoricoCompras= () => {
             {itensHistorico.map((itens) => {
               return (
                 <ContainerItem key={itens?.id}>
+                  <h5 className="text-white font-bold">Resume</h5>
                   <Modal
                     size="small"
                     isOpen={isOpen}
@@ -49,11 +52,11 @@ const HistoricoCompras= () => {
               <FaCartArrowDown className="text-7xl text-white transition transform animate-bounce" />
             </div>
             <h5 className="flex justify-center text-amber-400 mt-5">
-              {MESSAGES.NENHUM_ITEM_CARRINHO}
+              {/* {MESSAGES.NENHUM_ITEM_CARRINHO} */}
             </h5>
             <div className="w-full justify-center flex">
               <small className="text-white text-center">
-                {MESSAGES.VA_ATE_SESSAO_COMPRAS}
+                {/* {MESSAGES.VA_ATE_SESSAO_COMPRAS} */}
               </small>
             </div>
           </div>

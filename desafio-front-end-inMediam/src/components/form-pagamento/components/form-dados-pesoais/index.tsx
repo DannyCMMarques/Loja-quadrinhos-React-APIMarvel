@@ -193,9 +193,9 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
               placeholder="Insert your zip code here"
             />
 
-            {errors.zipcode && (
+            {errors?.zipcode && (
               <p className="    text-red-500 text-start text-sm ">
-                {errors.zipcode.message}
+                {errors?.zipcode?.message}
               </p>
             )}
           </div>

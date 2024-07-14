@@ -7,17 +7,17 @@ const ListaHistorico = ({ dados, OpenModal }: ListaHistoricoProps) => {
   const dadosCompra = item?.dadosCompra;
   const dadosPessoais = item?.dadosPessoais;
   const totalItens = dadosCompra?.totalItens;
-  const thumbnail = totalItens?.[0]?.thumbnail;
+  const thumbnail = totalItens[0]?.item?.thumbnail;
 
   const handleNumber = (number: any) => {
     return parseFloat(number).toFixed(2);
   };
 
   return (
-    <div className="w-full text-white flex h-36 justify-between items-center mb-2">
-      <div className="w-full flex justify-between gap-2 items-center p-2 mb-4 mt-4">
+    <div className="w-full text-white flex h-50 justify-around items-center mb-2">
+      <div className="w-full flex justify-around gap-5 items-center p-2 mb-4 mt-4">
         <div
-          className="h-32 w-full sm:w-full md:w-96"
+          className="h-48 w-full sm:w-full md:w-96"
           style={{
             backgroundImage: thumbnail
               ? `url(${thumbnail?.path}.${thumbnail?.extension})`
@@ -28,7 +28,7 @@ const ListaHistorico = ({ dados, OpenModal }: ListaHistoricoProps) => {
           }}
         ></div>
 
-        <div className="flex flex-col items-start w-2/3 justify-center">
+        <div className="flex flex-col items-start w-2/3  justify-center">
           <h5 className="font-bold text-sm text-center text-white">Nome:</h5>
           <span className="font-medium text-center text-white">
             {dadosPessoais?.firstname || "Desconhecido"}

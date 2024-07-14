@@ -5,5 +5,5 @@ export interface InputsFormDadosPessoais {
   city: string;
   state: string;
   phonenumber: string;
-  zicode: string;
+  zipcode: string;
 }
