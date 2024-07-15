@@ -92,7 +92,9 @@ const CepComponente = ({
       <div className="border-2 py-4 px-4 mt-8">
         {!temFrete && (
           <>
-            <h5 className="uppercase font-bold text-2xl text-white">Entrega</h5>
+            <h5 className="uppercase font-bold text-2xl text-white">
+              Delivery:
+            </h5>
             <p className="text-gray-300">{MESSAGES.CEPCOMPONENTE.CEP_FRASE}</p>
           </>
         )}
