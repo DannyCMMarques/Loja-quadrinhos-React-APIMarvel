@@ -7,8 +7,8 @@ import { useLocation } from "react-router-dom";
 import Paginacao from "../../../components/paginacao/paginacao";
 import useProductListService from "../../../service/product-list-service";
 import CardRadioItem from "../../../components/card-radio-items";
-import Loading from "../../../components/loading";
 import { MESSAGES } from "../../../utils/messages";
+import Loading from "../../../components/loading";
 
 const ProductList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,8 +43,8 @@ const ProductList = () => {
         let cardItemData;
         let cardRadioItem = await serviceProductList.getACategoriesTodas(
           tipoPagina,
-          limit,
-          page
+          100,
+          0
         );
         setRadioItem(cardRadioItem?.data?.results || []);
 
@@ -94,6 +94,7 @@ const ProductList = () => {
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className="w-full mt-24 md:mt-20 sm:mt-24">
         <div
           className="relative w-full h-72 -z-20"
@@ -125,10 +126,8 @@ const ProductList = () => {
                 frase={`${MESSAGES.TITULO_PAG_PRODUTO_LISTA} ${tipoPagina}`}
               />
             </div>
-            <div className="w-full grid gap-4 px-2 mt-15 grid-cols-2 sm:grid-cols-2 md:grid-cols-5">
-              {dataCardItem?.map((item) => (
-                <CardItem key={item.id} dataItem={item} />
-              ))}
+            <div className="w-full">
+              <CardItem dataItem={dataCardItem} useSwiper={false} />
             </div>
 
             {totalItens > limite && (

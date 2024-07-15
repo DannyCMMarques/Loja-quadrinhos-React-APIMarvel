@@ -40,5 +40,5 @@ export interface ListaHistoricoProps {
 }
 
 export interface HistoricoDetalhamentoProps {
-    dados: ItemHistorico;
-  }
+  dados: ItemHistorico;
+}

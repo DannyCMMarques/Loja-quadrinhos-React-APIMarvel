@@ -6,14 +6,17 @@ import { FaCartArrowDown } from "react-icons/fa6";
 import Modal from "../../components/modal";
 import FormComponent from "../../components/form-pagamento";
 import { MESSAGES } from "../../utils/messages";
-import { DataItensFinalizarCompra, ItemCarrinhoProps } from "../../utils/interfaces/pages/carrinho-compra";
+import {
+  DataItensFinalizarCompra,
+  ItemCarrinhoProps,
+} from "../../utils/interfaces/pages/carrinho-compra";
 
 const CarrinhoDeCompra = () => {
-
   const { itensCarrinhos } = useContext(UseItensCarrinhoContext);
 
   const [valorTotal, setValorTotal] = useState<number>(0);
-  const [dataFormFinalizarCompra, setDataFormFinalizarCompra] = useState<DataItensFinalizarCompra | null>(null);
+  const [dataFormFinalizarCompra, setDataFormFinalizarCompra] =
+    useState<DataItensFinalizarCompra | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [valorFrete, setValorFrete] = useState<number>(0);
 
@@ -26,7 +29,9 @@ const CarrinhoDeCompra = () => {
     if (frete) {
       const parsedFrete = JSON.parse(frete);
       if (parsedFrete?.frete?.valor) {
-        const valorFreteString = parsedFrete.frete.valor.replace("$", "").trim();
+        const valorFreteString = parsedFrete.frete.valor
+          .replace("$", "")
+          .trim();
         const valorFreteNumero = parseFloat(valorFreteString);
         setValorFrete(valorFreteNumero);
       }
@@ -47,8 +52,9 @@ const CarrinhoDeCompra = () => {
     setValorTotal(calcularValorTotal());
   }, [itensCarrinhos]);
 
- const produtos=itensCarrinhos.map((carrinho)=>{ return carrinho.item})
-
+  const produtos = itensCarrinhos.map((carrinho) => {
+    return carrinho.item;
+  });
 
   const handleOpenModal = () => {
     const dataItensFinalizar: DataItensFinalizarCompra = {
@@ -56,7 +62,6 @@ const CarrinhoDeCompra = () => {
       totalItens: itensCarrinhos,
     };
     setDataFormFinalizarCompra(dataItensFinalizar);
-console.log(dataFormFinalizarCompra)
     setIsOpen(true);
   };
 
@@ -66,20 +71,21 @@ console.log(dataFormFinalizarCompra)
 
   return (
     <>
-      <Modal onClose={handleCloseModal} isOpen={isOpen} size="small">
-        {dataFormFinalizarCompra && (
-          <FormComponent
-            dataItensCarrinho={dataFormFinalizarCompra}
-            onClose={handleCloseModal}
-          />
-        )}
-      </Modal>
+      {" "}
+      <ContainerItem>
+        <Modal onClose={handleCloseModal} isOpen={isOpen} size="small">
+          {dataFormFinalizarCompra && (
+            <FormComponent
+              dataItensCarrinho={dataFormFinalizarCompra}
+              onClose={handleCloseModal}
+            />
+          )}
+        </Modal>
 
-      <div className="w-full mt-16 md:mt-20 sm:mt-16 fle">
-        <ContainerItem>
+        <div className="w-full mt-28 md:mt-20 sm:mt-28">
           {itensCarrinhos.length > 0 ? (
             <>
-              <h5 className="font-bold items-center text-white mb-2 text-xl">
+              <h5 className="font-bold items-center text-white mt-5 mb-2 text-xl">
                 {MESSAGES.CARRINHO_COMPRA.TITULO_PAG_CARRINHO}
               </h5>
               {itensCarrinhos.map((item) => (
@@ -138,8 +144,8 @@ console.log(dataFormFinalizarCompra)
               </div>
             </>
           )}
-        </ContainerItem>
-      </div>
+        </div>
+      </ContainerItem>
     </>
   );
 };

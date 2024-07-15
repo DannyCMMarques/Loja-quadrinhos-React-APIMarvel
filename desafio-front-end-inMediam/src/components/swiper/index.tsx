@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ReactNode } from "react";
 import { SwiperProps } from "../../utils/interfaces/swipe-props";
 
 const SwiperComponent = ({
@@ -41,7 +41,7 @@ const SwiperComponent = ({
   };
 
   const proximoSlide = () => {
-    if (slideAtual + itensPorPagina < children.length) {
+    if (slideAtual + itensPorPagina < React.Children.count(children)) {
       setSlideAtual((prev) => prev + itensPorPagina);
     }
   };
@@ -67,7 +67,7 @@ const SwiperComponent = ({
         }}
         ref={slideRef}
       >
-        {children.map((child, index) => (
+        {React.Children.map(children, (child, index) => (
           <div
             className="w-1/5 flex-shrink-0"
             key={index}
@@ -88,10 +88,12 @@ const SwiperComponent = ({
       </button>
       <button
         className={`absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 ${
-          slideAtual + itensPorPagina >= children.length ? "opacity-50" : ""
+          slideAtual + itensPorPagina >= React.Children.count(children)
+            ? "opacity-50"
+            : ""
         }`}
         onClick={proximoSlide}
-        disabled={slideAtual + itensPorPagina >= children.length}
+        disabled={slideAtual + itensPorPagina >= React.Children.count(children)}
       >
         ❯
       </button>
