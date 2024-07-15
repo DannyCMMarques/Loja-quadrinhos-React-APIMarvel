@@ -40,7 +40,6 @@ const Modal = ({ isOpen, children, onClose, size, categoria }: ModalProps) => {
       className={`fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-70 z-[9999999999] ${
         modalOpen ? "block" : "hidden"
       }`}
-      onClick={handleCloseModal}
     >
       <div className={`${contentClass}`}>
         {children}
@@ -50,7 +49,7 @@ const Modal = ({ isOpen, children, onClose, size, categoria }: ModalProps) => {
             <IoClose size={24} />
           </button>
         ) : (
-          ""
+          null
         )}
       </div>
     </div>
