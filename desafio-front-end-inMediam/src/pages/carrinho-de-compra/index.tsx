@@ -62,7 +62,6 @@ const CarrinhoDeCompra = () => {
       totalItens: itensCarrinhos,
     };
     setDataFormFinalizarCompra(dataItensFinalizar);
-    console.log(dataFormFinalizarCompra);
     setIsOpen(true);
   };
 
