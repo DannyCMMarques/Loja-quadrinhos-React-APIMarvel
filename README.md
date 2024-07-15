@@ -79,15 +79,33 @@ que apresentam os quadrinhos somente do personagem ou da serie escolhida
    ### 2- Estilização feita com  Tailwind CSS:
    -possibilitou a construção de uma interfaces de usuário (UI) de maneira rápida e  esteticamente bonita.
    - Possibilitou criar criar layouts responsivos.
+     
      ![image](https://github.com/user-attachments/assets/c09c14b1-c3e4-412b-b844-e451cecdd0b0)
      ![image](https://github.com/user-attachments/assets/7950b37d-1f28-4cca-97eb-55d277ba3bd1)
-     ![image](https://github.com/user-attachments/assets/98025a52-219a-4a6c-9998-9cb968a06e7f)
+     ![image](https://github.com/user-attachments/assets/b3f5625e-ee1c-432c-911c-d8a86cf378b8)
+
 
    ### 3- Utilização das libs react-hook-form e Zod:
    - O que facilitou na realização do checkout para finalização da compra com cartão de crédito.
    - Possibilitou a realização de validação de formularios.
+     
      ![image](https://github.com/user-attachments/assets/900ce3d1-96f3-400b-8f8a-a3637fd22bc9)
      ![image](https://github.com/user-attachments/assets/7dd3c249-1bf4-41f6-b0ec-b5b544e216c4)
+     ![image](https://github.com/user-attachments/assets/83a20521-a6fc-49c4-aeca-cc72a90a7fac)
+
+     ### 4- Esquema de navegação de rotas com react-router-dom.
+
+     ### 5-  Context API:
+     - Foi utilizado o  gerenciador de estado global Context API, ele foi fundamental por permitir que multiplos componentes conseguissem acessar os dados disponibilizados nele
+     - 
+
+
+     
+
+
+
+
+     ![image](https://github.com/user-attachments/assets/5cec5b7e-d141-44f9-877f-e4e0d69d6bf6)
 
 
      
