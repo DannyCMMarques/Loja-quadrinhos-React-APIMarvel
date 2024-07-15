@@ -78,9 +78,9 @@ Uma informação importante que a documentação nos informa são os parâmetros
 
 ## 🛠️ Tecnologias Utilizadas
 
-### 1. ReactJs com Vite e TypeScript
+#### 1. ReactJs com Vite e TypeScript
 
-### 2. Estilização com Tailwind CSS
+#### 2. Estilização com Tailwind CSS
 
 - Possibilitou a construção de interfaces de usuário (UI) de maneira rápida e esteticamente bonita.
 - Possibilitou criar layouts responsivos.
@@ -91,7 +91,7 @@ Uma informação importante que a documentação nos informa são os parâmetros
   <img src="https://github.com/user-attachments/assets/b3f5625e-ee1c-432c-911c-d8a86cf378b8" width="200px" />
 </div>
 
-### 3. Utilização das libs react-hook-form e Zod
+#### 3. Utilização das libs react-hook-form e Zod
 
 - Facilitou a realização do checkout para finalização da compra com cartão de crédito.
 - Possibilitou a realização de validação de formulários.
@@ -102,9 +102,9 @@ Uma informação importante que a documentação nos informa são os parâmetros
   <img src="https://github.com/user-attachments/assets/1e7b0afe-1dc7-41ea-b6d9-cfcb57e63297" width="200px" />
 </div>
 
-### 4. Esquema de navegação de rotas com react-router-dom
+#### 4. Esquema de navegação de rotas com react-router-dom
 
-### 5. Context API
+#### 5. Context API
 
 - Foram usados o `UseItensCarrinhoContext` e `UseItensHistoricoContext`, que eram usados para pegar o que era armazenado no localStorage, no caso itens do carrinho de compra e frete e os itens armazenados no histórico de compras, e foram usados em diversos componentes.
 
@@ -114,7 +114,7 @@ Uma informação importante que a documentação nos informa são os parâmetros
   <img src="https://github.com/user-attachments/assets/3eb70f01-5525-4676-af9b-3fc78a20019c" width="200px" />
 </div>
 
-### 6. Custom Hooks
+#### 6. Custom Hooks
 
 - Foram criados custom hooks para formatar os preços que seriam exibidos.
 - Para verificar se o número do cartão de crédito inserido era válido e qual a marca dele.
@@ -123,7 +123,7 @@ Uma informação importante que a documentação nos informa são os parâmetros
   <img src="https://github.com/user-attachments/assets/5cec5b7e-d141-44f9-877f-e4e0d69d6bf6" width="200px" />
 </div>
 
- ### 7. API de CEP
+ ####  7. API de CEP
  - Foi utilizada uma api de CEP que retorna número de CEP, nome de cidade,estados e ruas para simular um frete.
    ![image](https://github.com/user-attachments/assets/08437169-5ad2-47e3-b265-092b4244105c)
 
@@ -133,31 +133,31 @@ Uma informação importante que a documentação nos informa são os parâmetros
 
 > A utilização de componentes genéricos possibilitou que um mesmo componente conseguisse ser usado em varios locais diferentes, o que gerou maior otimização na hora de montar o layout do site  e facilitou tambem a manuntenção eficiente do site. Alguns componentes genericos utilizados foram:
 
- ### Componente Swiper 
+ #### Componente Swiper 
 
  - Foi utilizado em home, comics,series,caracteres e nas paginas de produtos individuais
  - Responsavel por fornecer uma forma interativa e intuitiva de exibir as HQs
    ![image](https://github.com/user-attachments/assets/149d3031-bfa5-443e-b3e3-79d0545b798c)
 
-### Componente Modal
+#### Componente Modal
 
 - o mesmo Modal foi utilizado na pagina do carrinho nos formulario de compra e para exibir o historico de itens
 - Um mesmo componente poderia ter 3 tamanhos diferentes e apresentar ou nao botao de fechar
 
-### Componente Skeleton
+#### Componente Skeleton
 - foi utilizado o componente Skeleton em diferentes partes do site e foi ajustado em diferentes larguras e alturas inclusive redondo
 - Possibilitou que enquanto os dados carregam a pagina continua com um layout bonito e animado.
 
 ![bloggif_6694d845bc11b](https://github.com/user-attachments/assets/c88a9d25-1d75-4c34-9b26-1f2997e2f0ac)
 
-### Card-Itens
+#### Card-Itens
 
 -Foi utilizado em todas as paginas apenas mudava a informação do preço e seu background de acordo com HQ que ele apresentava
 
 ![image](https://github.com/user-attachments/assets/f995e733-7478-4679-8d9a-f46d582089b3)
 
 
-### Paginas de Listagem de Produtos
+#### Paginas de Listagem de Produtos
 - uma mesma pagina foi usada para Comics,Series e Characteres, as mudanças necessárias ocorriam de forma dinamica de acordo com o tipo de pagina
 
  ![image](https://github.com/user-attachments/assets/c7c58a17-250e-4d9b-a3c4-272c94961617)
