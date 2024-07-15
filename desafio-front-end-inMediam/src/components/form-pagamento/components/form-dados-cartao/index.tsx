@@ -123,7 +123,7 @@ const FormDataCartao = ({
 
             {mascaraCartao && (
               <p className="text-gray-500 text-start text-sm">
-                {MESSSAGES.FORMULARIO.TIPOCARTAO} {mascaraCartao}
+                {MESSAGES.FORMULARIO.TIPOCARTAO} {mascaraCartao}
               </p>
             )}
           </div>
@@ -175,7 +175,7 @@ const FormDataCartao = ({
                 htmlFor="cvv"
                 className="block text-sm mb-1 font-medium leading-6 text-gray-900"
               >
-                {MESSAGES.FORMULARIO.CVV}
+                {MESSAGES.FORMULARIO.CODIGO_SEGURANCA}
               </label>
               <input
                 type="number"
