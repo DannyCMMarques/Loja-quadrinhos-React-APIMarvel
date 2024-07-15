@@ -42,14 +42,39 @@ export const MESSAGES = {
   },
 
   CARRINHO_COMPRA: {
-    COMPRA_APROVADA: "Yay, purchase approved!",
+    COMPRA_APROVADA: "Yay, shopping approved!",
     TITULO_PAG_CARRINHO: "My Cart",
     TOTAL_PAG_CARRINHO: "Total: $",
     FINALIZAR_COMPRA: "Checkout",
     NENHUM_ITEM_CARRINHO: "No items in your shopping cart",
-    VA_ATE_SESSAO_COMPRAS: "Go to a section and make your purchases",
+    VA_ATE_SESSAO_COMPRAS: "Go to a section and make your shoppings",
     PAGINA_NAO_ENCONTRADA: "Oops! Page not found",
     PRODUTO: "Product",
     PRECO: "Price",
+    NENHUM_ITEM_HISTORICO: "You haven't done your shopping yet",
+  },
+  HISTORICO: {
+    TITULO: "Purchase History",
+    NOME: "Customer Name:",
+    DATA: "Date",
+    TOTAL: "Total Price",
+    METODO_PAGAMENTO: "Payment Method:",
+    CARTAO: "Credit card",
+  },
+  FORMULARIO: {
+    PAGAMENTO: "Payment",
+    NUMERO_CARTAO: "Card Number:",
+    TIPOCARTAO: "Card Type:",
+    NAME: " Full Name:",
+    CPF: "CPF:",
+    DATA_EXPIRACAO: " Expiration Date:",
+    CODIGO_SEGURANCA: "CVV:",
+    CREDITO: "Credit Card:",
+    PARCELA:" Installment Number:",
+PERSONAL_DATA: "Personal Data:",
+FIRST_NAME: "First Name:",
+ENDERECO:"Address:"
+
+
   },
 };

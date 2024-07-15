@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ModalProps } from "../../utils/interfaces/pages/carrinho-compra";
+import { IoClose } from "react-icons/io5";
 
-const Modal = ({ isOpen, children, onClose, size }: ModalProps) => {
+const Modal = ({ isOpen, children, onClose, size, categoria }: ModalProps) => {
   const [modalOpen, setModalOpen] = useState(isOpen);
 
   useEffect(() => {
@@ -19,11 +20,11 @@ const Modal = ({ isOpen, children, onClose, size }: ModalProps) => {
   switch (size) {
     case "small":
       contentClass =
-        "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[600px] max-h-[42rem] overflow-auto p-4 rounded-md";
+        "bg-white  rounded-lg shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[600px] max-h-[42rem] overflow-auto p-4 ";
       break;
     case "medium":
       contentClass =
-        "bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[900px] p-6 rounded-md";
+        "bg-white bg-white  rounded-lg shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[900px] p-6 rounded-md";
       break;
     case "large":
       contentClass =
@@ -41,12 +42,16 @@ const Modal = ({ isOpen, children, onClose, size }: ModalProps) => {
       }`}
       onClick={handleCloseModal}
     >
-      <div
-        className={`${contentClass}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={`${contentClass}`}>
         {children}
-        <button onClick={handleCloseModal} className="absolute top-2 right-2">Close</button>
+
+        {categoria === "historico" ? (
+          <button onClick={handleCloseModal} className="absolute top-2 right-2">
+            <IoClose size={24} />
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

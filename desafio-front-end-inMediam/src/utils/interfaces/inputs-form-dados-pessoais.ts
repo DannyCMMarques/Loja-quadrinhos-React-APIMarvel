@@ -4,6 +4,6 @@ export interface InputsFormDadosPessoais {
   address: string;
   city: string;
   state: string;
-  phonenumber: string;
-  zipcode: string;
+  phonenumber: number;
+  zipcode: any;
 }

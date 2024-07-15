@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import logo from "/Marvel_Logo.svg";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdHistory } from "react-icons/md";
 import menuContentItens from "../../utils/content/menuContentItens";
 import { UseItensCarrinhoContext } from "../../utils/context/useItensCarrinho";
+
 const Navbar = () => {
   const { itensCarrinhos } = useContext(UseItensCarrinhoContext);
 
@@ -70,7 +71,7 @@ const Navbar = () => {
 
               <div className="flex gap-3 items-baseline">
                 <a className="flex gap-2 text-lg" href="/historico-de-compras">
-                  <FiHeart
+                  <MdHistory
                     size={26}
                     className="hover:text-red-800 text-white"
                   />
@@ -137,9 +138,12 @@ const Navbar = () => {
                       <p>{itensCarrinhos.length}</p>
                     </div>
                   </a>
-                  <a className="flex gap-4 text-lg" href="/dashboard">
-                    <FiHeart
-                      size={22}
+                  <a
+                    className="flex gap-4 text-lg"
+                    href="/historico-de-compras"
+                  >
+                    <MdHistory
+                      size={26}
                       className="hover:text-red-800 hover:font-bold  text-white"
                     />
                   </a>

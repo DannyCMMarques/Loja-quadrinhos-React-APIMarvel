@@ -245,11 +245,7 @@ const ProdutoInfo = () => {
             {MESSAGES.PAGE_PRODUTO_INFO.VEJA_MAIS_OPCOES}
           </div>
           <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-            <SwiperComponent quantItemMobile={2} quantItems={5}>
-              {dataAllComics.map((item) => (
-                <CardItem key={item.id} dataItem={item} />
-              ))}
-            </SwiperComponent>
+            <CardItem dataItem={dataAllComics} />
           </div>
         </div>
       </ContainerItem>

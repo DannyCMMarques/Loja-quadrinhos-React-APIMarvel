@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "/Marvel_Logo.svg";
 import { cardMethod } from "../../utils/mocks/cards";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa6";
@@ -7,6 +7,24 @@ import { MESSAGES } from "../../utils/messages";
 
 const Footer = () => {
   const methodsCard = cardMethod;
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -46,7 +64,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="mt-8 sm:mt-10 md:mt-0 w-full md:w-auto text-center md:text-right">
+          <div className="mt-8 sm:mt-10 md:mt-0 w-full hidden sm:hidden md:block md:w-auto text-center md:text-right">
             <h5 className="font-bold text-xl mb-2">
               {MESSAGES.FOOTER.FORMAS_DE_PAGAMENTOS}
             </h5>
@@ -65,13 +83,13 @@ const Footer = () => {
             <h5 className="font-bold text-xl mb-2">
               {MESSAGES.FOOTER.REDES_SOCIAIS}
             </h5>
-            <div className="gap-5 items-center justify-center md:justify-start sm:justify-center">
+            <div className="gap-5 flex sm:flex md:block items-center justify-center md:justify-start sm:justify-center">
               <div className="flex justify-center md:justify-start sm:justify-center gap-5 mt-2 mb-2">
                 <FaInstagram
                   size={26}
                   className=" hover:text-orange-700 duration-150 cursor-pointer"
                 />
-                {MESSAGES.FOOTER.INSTAGRAM}
+                {windowSize.width >= 768 ? MESSAGES.FOOTER.INSTAGRAM : ""}
               </div>
 
               <div className="flex justify-center md:justify-start sm:justify-center gap-5 mt-2 mb-2">
@@ -79,7 +97,7 @@ const Footer = () => {
                   size={26}
                   className=" hover:text-orange-700 duration-150 cursor-pointer"
                 />
-                {MESSAGES.FOOTER.FACEBOOK}
+                {windowSize.width >= 768 ? MESSAGES.FOOTER.FACEBOOK : ""}
               </div>
 
               <div className="flex justify-center md:justify-start sm:justify-center gap-5 ">
@@ -87,7 +105,7 @@ const Footer = () => {
                   size={26}
                   className=" hover:text-orange-700 duration-150 cursor-pointer"
                 />
-                {MESSAGES.FOOTER.EMAIL}
+                {windowSize.width >= 768 ? MESSAGES.FOOTER.EMAIL : ""}
               </div>
             </div>
           </div>

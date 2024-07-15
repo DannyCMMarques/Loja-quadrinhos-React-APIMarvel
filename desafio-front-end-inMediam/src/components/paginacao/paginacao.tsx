@@ -23,7 +23,10 @@ const Paginacao = ({
   const atualizarPaginasVisiveis = () => {
     const maximoDePaginas = 5;
     let paginaInicial = Math.max(1, pagina - 2);
-    let paginaFinal = Math.min(numeroTotalDePagina, paginaInicial + maximoDePaginas - 1);
+    let paginaFinal = Math.min(
+      numeroTotalDePagina,
+      paginaInicial + maximoDePaginas - 1
+    );
 
     const paginasArray: any = [];
     for (let i = paginaInicial; i <= paginaFinal; i++) {
@@ -76,7 +79,7 @@ const Paginacao = ({
             <li key={numeroDePagina}>
               <button
                 className={`px-4 rounded-md focus:outline-none ${
-                  pagina ===numeroDePagina
+                  pagina === numeroDePagina
                     ? "bg-red-500 text-white"
                     : "text-gray-300 hover:bg-red-500 hover:text-white"
                 }`}
@@ -108,12 +111,16 @@ const Paginacao = ({
       </div>
       <div className="mt-4 sm:mt-0">
         <select
-          className="px-2 py-1 border-none bg-transparent text-white border-gray-300 rounded-md focus:outline-none"
+          className="px-2 py-1  bg-transparent text-white border-gray-300 rounded-md focus:outline-none"
           value={novoLimite}
           onChange={handleChangeLimit}
         >
           {valores.map((valores, index) => (
-            <option key={index} value={valores}>
+            <option
+              className="bg-black hover:bg-gray-400"
+              key={index}
+              value={valores}
+            >
               {valores}
             </option>
           ))}

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Loading from "../loading";
 import { FiSearch } from "react-icons/fi";
 import { MESSAGES } from "../../utils/messages";
 import {

@@ -4,6 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FaRegUser } from "react-icons/fa";
 import { InputsFormDadosPessoais } from "../../../../utils/interfaces/inputs-form-dados-pessoais";
+import { MESSAGES } from "../../../../utils/messages";
 
 const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
   const validationSchemaDados = z.object({
@@ -14,7 +15,7 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
     city: z.string().min(2, { message: "This field is required" }),
     state: z.string().min(2, { message: "This field is required" }),
     phonenumber: z.string().min(2, { message: "This field is required" }),
-    zipcode: z.string().min(2, { message: "This field is required" }),
+    zipcode: z.string().max(8, { message: "This zip code is invalid" }),
   });
 
   const {
@@ -46,7 +47,7 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
               <FaRegUser className="mr-3 text-red-500" size={24} />
             </span>
             <h2 className="text-black text-center text-lg font-bold ">
-              Personal Data
+              {MESSAGES.FORMULARIO.PERSONAL_DATA}
             </h2>
           </div>
 
@@ -55,7 +56,7 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
               htmlFor="first name"
               className="block text-sm mb-1 font-medium leading-6 text-gray-900"
             >
-              First Name:
+              {MESSAGES.FORMULARIO.FIRST_NAME}
             </label>
             <input
               type="text"
@@ -76,7 +77,7 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
               htmlFor="email"
               className="block text-sm mb-1 font-medium leading-6 text-gray-900"
             >
-              Email:
+              {MESSAGES.FOOTER.EMAIL}:
             </label>
             <input
               type="text"
@@ -97,7 +98,7 @@ const FormDadosPessoais = ({ handleCancel, handleProximo }) => {
               htmlFor="Adress"
               className="block text-sm mb-1 font-medium leading-6 text-gray-900"
             >
-              Address:
+              {MESSAGES.FORMULARIO.ENDERECO}
             </label>
             <input
               type="text"

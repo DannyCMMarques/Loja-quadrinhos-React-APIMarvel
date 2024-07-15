@@ -37,7 +37,7 @@ const Index = () => {
   const getComics = useCallback(async () => {
     setIsLoading(true);
     try {
-      const comic = await comicService.getACategoriesTodas("comics", 20, 80);
+      const comic = await comicService.getACategoriesTodas("comics", 20, 86);
       setDataComics(comic.data.results);
       setIsLoading(false);
     } catch (err) {
@@ -74,11 +74,15 @@ const Index = () => {
     }
   }, [comicService]);
 
-
   const getBestCreators = useCallback(async () => {
     setIsLoading(true);
     try {
-  const bestCreators = await comicService.getCategoriesID("creators",1168,20, 0);
+      const bestCreators = await comicService.getCategoriesID(
+        "creators",
+        1168,
+        20,
+        0
+      );
       setBestCreators(bestCreators.data.results);
       setIsLoading(false);
     } catch (err) {
@@ -106,32 +110,22 @@ const Index = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
       <>
         <div className="w-full mt-16 md:mt-16 sm:mt-16">
           <CardBannerItem dataItem={HQSAleatorios} />
 
           <ContainerItem>
-            <div className="w-full mb-5">
-              <FrasesHomeComponente frase={MESSAGES.FRASE_1_HOME} />
-            </div>
-            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-              <SwiperComponent quantItemMobile={2} quantItems={5}>
-                {dataComics.map((item) => (
-                  <CardItem key={item.id} dataItem={item} />
-                ))}
-              </SwiperComponent>
-            </div>
-
             <div className="w-full mt-1 md:mt-0 sm:mt-1 mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_2_HOME} />
             </div>
             <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-              <SwiperComponent quantItemMobile={2} quantItems={5}>
-                {dataBestsCharacters.map((item) => (
-                  <CardItem key={item?.id} dataItem={item} />
-                ))}
-              </SwiperComponent>
+              <CardItem dataItem={dataBestsCharacters} />
+            </div>
+            <div className="w-full mt-12 md:mt-15 sm:mt-12 mb-5">
+              <FrasesHomeComponente frase={MESSAGES.FRASE_4_HOME} />
+            </div>
+            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+              <CardItem dataItem={bestsSeries} />
             </div>
 
             <div className="mt-5">
@@ -144,25 +138,16 @@ const Index = () => {
             </div>
 
             <div className="w-full mt-12 md:mt-15 sm:mt-12 mb-5">
-              <FrasesHomeComponente frase={MESSAGES.FRASE_4_HOME} />
-            </div>
-            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-              <SwiperComponent quantItemMobile={2} quantItems={5}>
-                {bestsSeries.map((item) => (
-                  <CardItem key={item?.id} dataItem={item} />
-                ))}
-              </SwiperComponent>
-            </div>
-
-            <div className="w-full mt-12 md:mt-15 sm:mt-12 mb-5">
               <FrasesHomeComponente frase={MESSAGES.FRASE_3_HOME} />
             </div>
             <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
-              <SwiperComponent quantItemMobile={2} quantItems={5}>
-                {dataBestsCreators.map((item) => (
-                  <CardItem key={item?.id} dataItem={item} />
-                ))}
-              </SwiperComponent>
+              <CardItem dataItem={dataBestsCreators} />
+            </div>
+            <div className="w-full mt-5 mb-5">
+              <FrasesHomeComponente frase={MESSAGES.FRASE_1_HOME} />
+            </div>
+            <div className="w-full flex grid-cols-2 sm:grid-cols-2 md:flex gap-4 px-2">
+              <CardItem dataItem={dataComics} />
             </div>
           </ContainerItem>
         </div>
