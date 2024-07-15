@@ -103,7 +103,7 @@ const FormDataCartao = ({
               htmlFor="card number"
               className="block text-sm mb-1 font-medium leading-6 text-gray-900"
             >
-              {MESSAGES.FORMULARIO.NUMEROCARTAO}
+              {MESSAGES.FORMULARIO.NUMERO_CARTAO}
             </label>
             <input
               type="text"
