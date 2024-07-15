@@ -6,6 +6,7 @@ import { FaCreditCard, FaRegUser } from "react-icons/fa";
 import { parcelaOpcoes } from "../../../../utils/mocks/parcelas-cartao-mock";
 import useValidadorCartao from "../../../../hooks/useValidadorCartao";
 import { InputsFormDadosCartao } from "../../../../utils/interfaces/input-form-data-cartao";
+import { MESSAGES } from "../../../../utils/messages";
 
 const FormDataCartao = ({
   handleVoltar,
@@ -26,7 +27,7 @@ const FormDataCartao = ({
     nomeImpresso: z.string().min(2, { message: "This field is required" }),
     dataValidade: z.string().min(2, { message: "This field is required" }),
     cvv: z.string().max(3, { message: "cvv is just three numbers" }),
-    cpf: z.string().min(2, { message: "This field is required" }),
+    cpf: z.string().max(11, { message: "This CPF is invalid" }),
     parcela: z.string(),
   });
 
@@ -64,7 +65,6 @@ const FormDataCartao = ({
   const mascaraCartao = useValidadorCartao(watch("numeroCartao"));
 
   const formatCardNumber = (value: string) => {
-
     const valorNumerico = value?.replace(/\D/g, "");
 
     let valorFormatado = "";
@@ -77,7 +77,9 @@ const FormDataCartao = ({
     return valorFormatado;
   };
 
-  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value } = event.target;
     const valorFormatado = formatCardNumber(value);
     setNumeroCartaoFormatado(valorFormatado);
@@ -92,7 +94,7 @@ const FormDataCartao = ({
               <FaCreditCard className="mr-3 text-red-500" size={24} />
             </span>
             <h2 className="text-black text-center text-lg font-bold ">
-              Payment
+              {MESSAGES.FORMULARIO.PAGAMENTO}
             </h2>
           </div>
 
@@ -101,7 +103,7 @@ const FormDataCartao = ({
               htmlFor="card number"
               className="block text-sm mb-1 font-medium leading-6 text-gray-900"
             >
-              Card Number:
+              {MESSAGES.FORMULARIO.NUMEROCARTAO}
             </label>
             <input
               type="text"
@@ -121,7 +123,7 @@ const FormDataCartao = ({
 
             {mascaraCartao && (
               <p className="text-gray-500 text-start text-sm">
-                Card Type: {mascaraCartao}
+                {MESSSAGES.FORMULARIO.TIPOCARTAO} {mascaraCartao}
               </p>
             )}
           </div>
@@ -130,7 +132,7 @@ const FormDataCartao = ({
               htmlFor="card name"
               className="block text-sm mb-1 font-medium leading-6 text-gray-900"
             >
-              Full Name:
+              {MESSAGES.FORMULARIO.NAME}
             </label>
             <input
               type="text"
@@ -152,7 +154,7 @@ const FormDataCartao = ({
                 htmlFor="expiration date"
                 className="block text-sm mb-1 font-medium leading-6 text-gray-900"
               >
-                Expiration Date:
+                {MESSAGES.FORMULARIO.DATA_EXPIRACAO}
               </label>
               <input
                 type="date"
@@ -173,16 +175,15 @@ const FormDataCartao = ({
                 htmlFor="cvv"
                 className="block text-sm mb-1 font-medium leading-6 text-gray-900"
               >
-                CVV
+                {MESSAGES.FORMULARIO.CVV}
               </label>
               <input
-                type="text"
+                type="number"
                 id="cvv"
                 {...register("cvv")}
-                className="block w-full rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-1  focus:ring-gray-500 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-1 focus:ring-gray-500 sm:text-sm sm:leading-6"
                 placeholder="Enter your CVV"
               />
-
               {errors.cvv && (
                 <p className="text-red-500 text-start text-sm">
                   {errors.cvv.message}
@@ -197,7 +198,7 @@ const FormDataCartao = ({
                 htmlFor="cpf"
                 className="block text-sm mb-1 font-medium leading-6 text-gray-900"
               >
-                CPF:
+                {MESSAGES.FORMULARIO.CPF}
               </label>
               <input
                 type="text"
@@ -218,7 +219,7 @@ const FormDataCartao = ({
                 htmlFor="installment number"
                 className="block text-sm mb-1 font-medium leading-6 text-gray-900"
               >
-                Installment Number
+                {MESSAGES.FORMULARIO.PARCELA}
               </label>
               <select
                 id="parcela"

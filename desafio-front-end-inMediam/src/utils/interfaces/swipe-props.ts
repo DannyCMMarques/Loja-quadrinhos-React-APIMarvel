@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface SwiperProps {
-  children: ReactNode[];
+  children: any;
   quantItemMobile?: number;
   quantItems?: number;
 }
