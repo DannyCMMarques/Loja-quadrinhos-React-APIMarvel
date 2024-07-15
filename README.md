@@ -91,13 +91,14 @@ que apresentam os quadrinhos somente do personagem ou da serie escolhida
      
      ![image](https://github.com/user-attachments/assets/900ce3d1-96f3-400b-8f8a-a3637fd22bc9)
      ![image](https://github.com/user-attachments/assets/7dd3c249-1bf4-41f6-b0ec-b5b544e216c4)
-     ![image](https://github.com/user-attachments/assets/83a20521-a6fc-49c4-aeca-cc72a90a7fac)
+     ![image](https://github.com/user-attachments/assets/1e7b0afe-1dc7-41ea-b6d9-cfcb57e63297)
+
 
      ### 4- Esquema de navegação de rotas com react-router-dom.
 
      ### 5-  Context API:
      - Foi utilizado o  gerenciador de estado global Context API, ele foi fundamental por permitir que multiplos componentes conseguissem acessar os dados disponibilizados nele
-     - 
+     -  Foram criados dois 
 
 
      
